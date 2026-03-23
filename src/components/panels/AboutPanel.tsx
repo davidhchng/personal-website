@@ -1,41 +1,46 @@
 "use client";
 
-// ─── AboutPanel ───────────────────────────────────────────────────────────────
-// Revealed when the trunk opens.
-//
-// TO REPLACE: update the bio text, name, role, and any links below.
-// ─────────────────────────────────────────────────────────────────────────────
-
 export default function AboutPanel() {
   return (
-    <div>
-      {/* ← REPLACE: your name and title */}
-      <h2 className="text-xl font-semibold text-white mb-2 leading-tight">
-        David Chang
-      </h2>
-      <p className="text-white/40 text-sm mb-8 tracking-wide">
-        Software Engineer {/* ← REPLACE: your role */}
-      </p>
+    <div className="space-y-6">
+      <div>
+        <h2 className="text-xl font-semibold text-white mb-1">David Chang</h2>
+        <p className="text-white/45 text-xs tracking-wide">Statistics · University of British Columbia · Langley, BC</p>
+      </div>
 
-      {/* ← REPLACE: your bio. Keep it short — this is a panel, not a page. */}
-      <p className="text-white/70 text-sm leading-relaxed mb-6">
-        I build things for the web and occasionally for fun. Currently working on
-        problems in [domain]. Previously at [company/school]. I drive a white 2011
-        Mitsubishi Lancer ES and I&apos;m not sorry about it.
+      <p className="text-white/70 text-sm leading-relaxed">
+        Statistics undergraduate at UBC interested in data science education and reproducible
+        analytical workflows. I build end-to-end data pipelines, lead workshops, and help
+        newcomers learn practical tools like version control, data analysis, and collaborative
+        research practices.
       </p>
 
       <p className="text-white/70 text-sm leading-relaxed">
-        Outside of code: [hobbies, interests — make it human].
+        I drive a white 2011 Mitsubishi Lancer ES and I&apos;m not sorry about it.
       </p>
 
-      {/* Divider */}
-      <div className="border-t border-white/10 mt-8 pt-6">
-        <p className="text-white/30 text-xs tracking-widest uppercase mb-4">
-          Currently
+      <div className="border-t border-white/10 pt-5 space-y-3">
+        <p className="text-white/30 text-[10px] tracking-widest uppercase">Education</p>
+        <div className="flex justify-between items-baseline">
+          <div>
+            <p className="text-white/80 text-sm font-medium">B.Sc. Statistics</p>
+            <p className="text-white/40 text-xs mt-0.5">University of British Columbia</p>
+          </div>
+          <span className="text-white/30 text-xs flex-shrink-0 ml-4">Expected May 2028</span>
+        </div>
+        <div className="space-y-1 pt-1">
+          <p className="text-white/50 text-xs">Joseph Chung Scholarship — $5,000</p>
+          <p className="text-white/50 text-xs">BC Achievement Scholarship — $1,250</p>
+        </div>
+      </div>
+
+      <div className="border-t border-white/10 pt-5 space-y-2">
+        <p className="text-white/30 text-[10px] tracking-widest uppercase">Currently</p>
+        <p className="text-white/55 text-xs leading-relaxed">
+          Technical Director @ UBC Undergraduate Statistics Society
         </p>
-        {/* ← REPLACE: what you're working on right now */}
-        <p className="text-white/50 text-sm">
-          Building [current project or role] — [one sentence on what it is].
+        <p className="text-white/55 text-xs leading-relaxed">
+          Web Development & Event Lead @ UBC STEM Fellowship
         </p>
       </div>
     </div>

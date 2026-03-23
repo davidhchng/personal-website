@@ -2,29 +2,32 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { SectionId } from "@/types";
-import AboutPanel       from "@/components/panels/AboutPanel";
-import ProjectsPanel    from "@/components/panels/ProjectsPanel";
-import SkillsPanel      from "@/components/panels/SkillsPanel";
-import ExperiencePanel  from "@/components/panels/ExperiencePanel";
-import HobbiesPanel     from "@/components/panels/HobbiesPanel";
-import ContactPanel     from "@/components/panels/ContactPanel";
+import AboutPanel        from "@/components/panels/AboutPanel";
+import ProjectsPanel     from "@/components/panels/ProjectsPanel";
+import SkillsPanel       from "@/components/panels/SkillsPanel";
+import ExperiencePanel   from "@/components/panels/ExperiencePanel";
+import VolunteeringPanel from "@/components/panels/VolunteeringPanel";
+import HobbiesPanel      from "@/components/panels/HobbiesPanel";
+import ContactPanel      from "@/components/panels/ContactPanel";
 
 const PANEL_MAP: Partial<Record<SectionId, React.ComponentType>> = {
-  about:      AboutPanel,
-  projects:   ProjectsPanel,
-  skills:     SkillsPanel,
-  experience: ExperiencePanel,
-  hobbies:    HobbiesPanel,
-  contact:    ContactPanel,
+  about:        AboutPanel,
+  projects:     ProjectsPanel,
+  skills:       SkillsPanel,
+  experience:   ExperiencePanel,
+  volunteering: VolunteeringPanel,
+  hobbies:      HobbiesPanel,
+  contact:      ContactPanel,
 };
 
 const SECTION_LABELS: Partial<Record<SectionId, string>> = {
-  about:      "About",
-  projects:   "Projects",
-  skills:     "Skills",
-  experience: "Experience",
-  hobbies:    "Hobbies",
-  contact:    "Contact",
+  about:        "About",
+  projects:     "Projects",
+  skills:       "Skills",
+  experience:   "Experience",
+  volunteering: "Volunteering",
+  hobbies:      "Hobbies",
+  contact:      "Contact",
 };
 
 // Content slides in/out matching the direction of wheel rotation

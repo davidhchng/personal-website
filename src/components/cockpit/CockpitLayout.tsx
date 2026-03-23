@@ -8,12 +8,13 @@ import DashboardScreen from "./DashboardScreen";
 import ControlStrip    from "./ControlStrip";
 
 const COCKPIT_SECTIONS: { id: SectionId; label: string }[] = [
-  { id: "about",      label: "About"      },
-  { id: "projects",   label: "Projects"   },
-  { id: "skills",     label: "Skills"     },
-  { id: "experience", label: "Experience" },
-  { id: "hobbies",    label: "Hobbies"    },
-  { id: "contact",    label: "Contact"    },
+  { id: "about",        label: "About"        },
+  { id: "projects",     label: "Projects"     },
+  { id: "skills",       label: "Skills"       },
+  { id: "experience",   label: "Experience"   },
+  { id: "volunteering", label: "Volunteering" },
+  { id: "hobbies",      label: "Hobbies"      },
+  { id: "contact",      label: "Contact"      },
 ];
 
 export default function CockpitLayout() {
@@ -27,7 +28,7 @@ export default function CockpitLayout() {
     setSectionIndex(newIdx);
   };
 
-  // Keyboard: ← / → to step, 1–6 to jump directly
+  // Keyboard: ← / → to step, 1–7 to jump directly
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft"  || e.key === "ArrowUp")
@@ -60,15 +61,14 @@ export default function CockpitLayout() {
           David Chang
         </h1>
 
-        {/* Active section — slides in the direction of travel */}
         <AnimatePresence mode="wait" custom={direction}>
           <motion.span
             key={activeSection.id}
             custom={direction}
             variants={{
-              enter: (d: number) => ({ opacity: 0, x: d * 18 }),
+              enter:  (d: number) => ({ opacity: 0, x: d * 18 }),
               center: { opacity: 1, x: 0 },
-              exit:  (d: number) => ({ opacity: 0, x: d * -18 }),
+              exit:   (d: number) => ({ opacity: 0, x: d * -18 }),
             }}
             initial="enter"
             animate="center"
@@ -82,7 +82,7 @@ export default function CockpitLayout() {
         </AnimatePresence>
       </div>
 
-      {/* ── Dashboard lip — the physical raised edge ──────────────────────────── */}
+      {/* ── Dashboard lip ────────────────────────────────────────────────────── */}
       <div
         className="w-full flex-shrink-0"
         style={{

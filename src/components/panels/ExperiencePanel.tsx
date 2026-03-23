@@ -1,61 +1,102 @@
 "use client";
 
-// ─── ExperiencePanel ──────────────────────────────────────────────────────────
-// TO REPLACE: swap the placeholder entries with your actual work history.
-// ─────────────────────────────────────────────────────────────────────────────
-
-interface ExperienceItem {
-  company: string;
+interface Role {
+  org: string;
   role: string;
   period: string;
-  description: string;
+  location: string;
+  bullets: string[];
 }
 
-// ← REPLACE THIS with your actual experience
-const EXPERIENCE: ExperienceItem[] = [
+const LEADERSHIP: Role[] = [
   {
-    company: "Company A",
-    role: "Software Engineer",
-    period: "2023 — Present",
-    description: "What you built, what you shipped, what you improved. Keep it tight.",
+    role: "Technical Director",
+    org: "UBC Undergraduate Statistics Society",
+    period: "Oct 2025 — Present",
+    location: "Vancouver, BC",
+    bullets: [
+      "Generated and curated a real-world dataset for the Dataverse Datathon used by 60+ participants.",
+      "Led a Data Science 100 final exam review workshop for 30+ students covering statistical reasoning and data analysis workflows.",
+      "Evaluated 60+ datathon submissions assessing analytical methodology, data quality, and clarity of insights.",
+    ],
   },
   {
-    company: "Company B",
-    role: "Software Engineer Intern",
-    period: "2022",
-    description: "What you worked on and what you learned.",
-  },
-  {
-    company: "University / School",
-    role: "B.S. Computer Science",
-    period: "2019 — 2023",
-    description: "Relevant coursework, projects, or research.",
+    role: "Web Development & Event Lead",
+    org: "UBC STEM Fellowship",
+    period: "Oct 2025 — Present",
+    location: "Surrey, BC",
+    bullets: [
+      "Designed and deployed the organization website (ubcstemfellowship.com).",
+      "Evaluated 125+ high-school applications for Research Exploration Opportunities (REO).",
+      "Designed and judged a STEM case competition for 70+ participants evaluating analytical reasoning.",
+    ],
   },
 ];
 
+const WORK: Role[] = [
+  {
+    role: "Barista",
+    org: "Starbucks",
+    period: "Aug 2025 — Present",
+    location: "Surrey, BC",
+    bullets: [
+      "Customer service in a fast-paced environment with high daily volumes.",
+      "Trained and supported new hires on procedures, POS systems, and service standards.",
+    ],
+  },
+  {
+    role: "Team Lead",
+    org: "New York Fries",
+    period: "Jul 2022 — Aug 2025",
+    location: "Surrey, BC",
+    bullets: [
+      "Supervised crew task distribution during peak service hours.",
+      "Trained new employees on food prep, safety standards, and customer service.",
+      "Contributed to a top-performing BC store achieving 9% annual sales growth.",
+    ],
+  },
+];
+
+function RoleItem({ item }: { item: Role }) {
+  return (
+    <li className="flex gap-4">
+      <div className="flex flex-col items-center pt-1 flex-shrink-0">
+        <div className="w-1.5 h-1.5 rounded-full bg-white/25" />
+        <div className="w-px flex-1 bg-white/6 mt-1.5" />
+      </div>
+      <div className="pb-5">
+        <div className="flex items-baseline justify-between gap-2 mb-0.5">
+          <span className="text-white text-sm font-medium">{item.role}</span>
+          <span className="text-white/28 text-[10px] tracking-wider flex-shrink-0 tabular-nums">{item.period}</span>
+        </div>
+        <p className="text-white/42 text-xs mb-2">{item.org} · {item.location}</p>
+        <ul className="space-y-1">
+          {item.bullets.map((b, i) => (
+            <li key={i} className="text-white/55 text-xs leading-relaxed">
+              — {b}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </li>
+  );
+}
+
 export default function ExperiencePanel() {
   return (
-    <div>
-      <ul className="space-y-7">
-        {EXPERIENCE.map((item) => (
-          <li key={item.company} className="flex gap-4">
-            {/* Timeline dot */}
-            <div className="flex flex-col items-center pt-1 flex-shrink-0">
-              <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-              <div className="w-px flex-1 bg-white/5 mt-1.5" />
-            </div>
-
-            <div className="pb-6">
-              <div className="flex items-baseline justify-between gap-2 mb-0.5">
-                <span className="text-white text-sm font-medium">{item.role}</span>
-                <span className="text-white/25 text-[10px] tracking-wider flex-shrink-0">{item.period}</span>
-              </div>
-              <p className="text-white/40 text-xs mb-2 tracking-wide">{item.company}</p>
-              <p className="text-white/50 text-xs leading-relaxed">{item.description}</p>
-            </div>
-          </li>
-        ))}
+    <div className="space-y-6">
+      {/* Leadership / Technical */}
+      <ul className="space-y-1">
+        {LEADERSHIP.map((item) => <RoleItem key={item.org} item={item} />)}
       </ul>
+
+      {/* Additional work */}
+      <div className="border-t border-white/10 pt-5">
+        <p className="text-white/30 text-[10px] tracking-widest uppercase mb-4">Additional Work</p>
+        <ul className="space-y-1">
+          {WORK.map((item) => <RoleItem key={item.org} item={item} />)}
+        </ul>
+      </div>
     </div>
   );
 }

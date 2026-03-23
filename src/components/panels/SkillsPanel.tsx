@@ -1,68 +1,43 @@
 "use client";
 
-// ─── SkillsPanel ──────────────────────────────────────────────────────────────
-// Revealed when the hood opens.
-//
-// TO REPLACE: update the skill categories and items below.
-// TO EXTEND: add more categories — the layout will adapt automatically.
-// ─────────────────────────────────────────────────────────────────────────────
-
-interface SkillGroup {
-  category: string;
-  items: string[];
-}
-
-// ← REPLACE THIS with your actual skills
-const SKILL_GROUPS: SkillGroup[] = [
+const SKILL_GROUPS = [
   {
-    category: "Languages",
-    items: ["TypeScript", "Python", "Rust", "SQL"],
+    category: "Programming",
+    items: ["Python", "R", "SQL", "Java"],
   },
   {
-    category: "Frontend",
-    items: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
+    category: "Data Tools",
+    items: ["Pandas", "Tidyverse", "Tableau", "Excel"],
   },
   {
-    category: "Backend",
-    items: ["Node.js", "FastAPI", "PostgreSQL", "Redis"],
+    category: "Web & APIs",
+    items: ["Next.js", "TypeScript", "FastAPI"],
   },
   {
-    category: "Tools",
-    items: ["Git", "Docker", "AWS", "Vercel"],
+    category: "Other Tools",
+    items: ["Git", "Version Control"],
   },
 ];
 
-// ← REPLACE THIS with your actual experience timeline
-const EXPERIENCE = [
-  {
-    role: "Software Engineer",        // ← REPLACE
-    org: "Company / Project",         // ← REPLACE
-    period: "2023 — Present",         // ← REPLACE
-  },
-  {
-    role: "Previous Role",            // ← REPLACE
-    org: "Previous Company",          // ← REPLACE
-    period: "2021 — 2023",            // ← REPLACE
-  },
+const COURSEWORK = [
+  { name: "Integral Calculus",        grade: "94%" },
+  { name: "Intro to Data Science",    grade: "89%" },
+  { name: "Systematic Program Design", grade: "90%" },
 ];
 
 export default function SkillsPanel() {
   return (
-    <div>
-      <h2 className="text-xl font-semibold text-white mb-6 leading-tight">
-        Skills
-      </h2>
-
+    <div className="space-y-7">
       {/* Skills grid */}
-      <div className="grid grid-cols-2 gap-x-8 gap-y-6 mb-10">
+      <div className="grid grid-cols-2 gap-x-8 gap-y-6">
         {SKILL_GROUPS.map((group) => (
           <div key={group.category}>
-            <p className="text-white/30 text-xs tracking-widest uppercase mb-2">
+            <p className="text-white/35 text-[10px] tracking-widest uppercase mb-2.5">
               {group.category}
             </p>
-            <ul className="space-y-1">
+            <ul className="space-y-1.5">
               {group.items.map((item) => (
-                <li key={item} className="text-white/70 text-sm">
+                <li key={item} className="text-white/72 text-sm">
                   {item}
                 </li>
               ))}
@@ -71,21 +46,16 @@ export default function SkillsPanel() {
         ))}
       </div>
 
-      {/* Experience timeline */}
-      <div className="border-t border-white/10 pt-6">
-        <p className="text-white/30 text-xs tracking-widest uppercase mb-4">
-          Experience
+      {/* Relevant coursework */}
+      <div className="border-t border-white/10 pt-5">
+        <p className="text-white/35 text-[10px] tracking-widest uppercase mb-3">
+          Relevant Coursework
         </p>
-        <ul className="space-y-4">
-          {EXPERIENCE.map((exp, i) => (
-            <li key={i} className="flex justify-between items-baseline">
-              <div>
-                <p className="text-white/80 text-sm font-medium">{exp.role}</p>
-                <p className="text-white/40 text-xs mt-0.5">{exp.org}</p>
-              </div>
-              <span className="text-white/30 text-xs flex-shrink-0 ml-4">
-                {exp.period}
-              </span>
+        <ul className="space-y-2">
+          {COURSEWORK.map((c) => (
+            <li key={c.name} className="flex justify-between items-baseline">
+              <span className="text-white/65 text-xs">{c.name}</span>
+              <span className="text-white/35 text-xs font-medium tabular-nums ml-4">{c.grade}</span>
             </li>
           ))}
         </ul>

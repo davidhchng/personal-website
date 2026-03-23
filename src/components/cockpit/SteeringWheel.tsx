@@ -3,12 +3,12 @@
 import { useRef, useEffect } from "react";
 import { motion, useMotionValue, animate } from "framer-motion";
 
-// 40° between each of 6 sections — real steering effort to advance
-const SECTION_ANGLES: number[] = [-100, -60, -20, 20, 60, 100];
+// 30° between each of 7 sections
+const SECTION_ANGLES: number[] = [-90, -60, -30, 0, 30, 60, 90];
 const SECTION_COUNT = SECTION_ANGLES.length;
 
-// Midpoints — crossing these triggers a live section change while dragging
-const THRESHOLDS = [-80, -40, 0, 40, 80];
+// Midpoints between adjacent sections
+const THRESHOLDS = [-75, -45, -15, 15, 45, 75];
 
 function angleToSection(deg: number): number {
   if (deg < THRESHOLDS[0]) return 0;
@@ -16,7 +16,8 @@ function angleToSection(deg: number): number {
   if (deg < THRESHOLDS[2]) return 2;
   if (deg < THRESHOLDS[3]) return 3;
   if (deg < THRESHOLDS[4]) return 4;
-  return 5;
+  if (deg < THRESHOLDS[5]) return 5;
+  return 6;
 }
 
 interface SteeringWheelProps {
@@ -73,7 +74,7 @@ export default function SteeringWheel({ sectionIndex, onSectionChange }: Steerin
 
     if (Math.abs(delta) > 6) hasMoved.current = true;
 
-    const clamped = Math.max(-118, Math.min(118, dragStartRotation.current + delta));
+    const clamped = Math.max(-105, Math.min(105, dragStartRotation.current + delta));
     rotation.set(clamped);
 
     // Live section update — dashboard responds as you spin
