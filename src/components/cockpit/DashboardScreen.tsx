@@ -76,8 +76,8 @@ export default function DashboardScreen({ sectionId, sectionIndex, direction }: 
       </div>
 
       {/* Scrollable content — slides in the direction of wheel rotation */}
-      <div className="flex-1 overflow-y-auto min-h-0 px-5 py-4">
-        <AnimatePresence mode="wait" custom={direction}>
+      <div className="flex-1 overflow-y-auto min-h-0 px-5 py-4" style={{ position: "relative" }}>
+        <AnimatePresence custom={direction} initial={false}>
           <motion.div
             key={sectionId}
             custom={direction}
@@ -85,7 +85,8 @@ export default function DashboardScreen({ sectionId, sectionIndex, direction }: 
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.2, ease: "easeInOut" }}
+            transition={{ duration: 0.15, ease: "easeInOut" }}
+            style={{ position: "absolute", width: "100%" }}
           >
             {Panel && <Panel />}
           </motion.div>

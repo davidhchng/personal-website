@@ -3,28 +3,23 @@
 const HOBBIES = [
   {
     name: "Cars",
-    detail: "Daily driving a white 2011 Mitsubishi Lancer ES. Planning mods I'll probably never do.",
+    detail: "I drive a Mitsubishi Lancer 2011 ES, and it's my baby.",
     tags: ["JDM", "Lancer", "4B11T someday"],
   },
   {
     name: "Ultimate Frisbee",
-    detail: "Outdoor pickup games when the weather is cooperating. Occasionally when it isn't.",
-    tags: ["outdoor", "pickup"],
+    detail: "Played for Vortex 2024, and we came 12th in Canada!",
+    tags: ["outdoor", "pickup", "Vortex"],
   },
   {
     name: "NBA Analytics",
-    detail: "Second-screening games while building player stat models in my head. Advanced metrics defender.",
-    tags: ["data", "basketball", "advanced metrics"],
+    detail: "I love Shai, but not as much as Lebron.",
+    tags: ["advanced metrics", "basketball"],
   },
   {
     name: "AI-assisted workflows",
-    detail: "Actually using it, not just talking about it. Automating the boring parts so the interesting parts can stay interesting.",
+    detail: "",
     tags: ["LLMs", "automation", "tooling"],
-  },
-  {
-    name: "Building things",
-    detail: "Side projects at midnight. Custom keyboards. If it can be overengineered, it will be.",
-    tags: ["side projects", "keyboards", "too many tabs open"],
   },
 ];
 
@@ -37,7 +32,9 @@ export default function HobbiesPanel() {
             <span className="text-white text-sm font-medium">{hobby.name}</span>
             <div className="flex-1 h-px bg-white/8" />
           </div>
-          <p className="text-white/55 text-xs leading-relaxed mb-2">{hobby.detail}</p>
+          {hobby.detail && (
+            <p className="text-white/55 text-xs leading-relaxed mb-2">{hobby.detail}</p>
+          )}
           <div className="flex gap-2 flex-wrap">
             {hobby.tags.map((tag) => (
               <span key={tag} className="text-white/32 text-[10px] border border-white/10 px-2 py-0.5">

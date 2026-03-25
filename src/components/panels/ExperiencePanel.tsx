@@ -1,11 +1,13 @@
 "use client";
 
+import { ReactNode } from "react";
+
 interface Role {
   org: string;
   role: string;
   period: string;
   location: string;
-  bullets: string[];
+  bullets: ReactNode[];
 }
 
 const LEADERSHIP: Role[] = [
@@ -26,7 +28,7 @@ const LEADERSHIP: Role[] = [
     period: "Oct 2025 — Present",
     location: "Surrey, BC",
     bullets: [
-      "Designed and deployed the organization website (ubcstemfellowship.com).",
+      <>Designed and deployed the organization website: <a href="https://ubcstemfellowship.com" target="_blank" rel="noopener noreferrer" className="text-white/70 underline underline-offset-2 hover:text-white transition-colors duration-200">ubcstemfellowship.com</a></>,
       "Evaluated 125+ high-school applications for Research Exploration Opportunities (REO).",
       "Designed and judged a STEM case competition for 70+ participants evaluating analytical reasoning.",
     ],
@@ -85,12 +87,10 @@ function RoleItem({ item }: { item: Role }) {
 export default function ExperiencePanel() {
   return (
     <div className="space-y-6">
-      {/* Leadership / Technical */}
       <ul className="space-y-1">
         {LEADERSHIP.map((item) => <RoleItem key={item.org} item={item} />)}
       </ul>
 
-      {/* Additional work */}
       <div className="border-t border-white/10 pt-5">
         <p className="text-white/30 text-[10px] tracking-widest uppercase mb-4">Additional Work</p>
         <ul className="space-y-1">

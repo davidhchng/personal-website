@@ -15,19 +15,19 @@ interface ControlStripProps {
 
 export default function ControlStrip({ sections, sectionIndex, onSectionChange }: ControlStripProps) {
   return (
-    <div className="flex items-center justify-center gap-6 pt-4">
+    <div className="flex items-center justify-center gap-3 md:gap-5 pt-3 md:pt-4">
       {sections.map((section, idx) => {
         const isActive = idx === sectionIndex;
         return (
           <button
             key={section.id}
             onClick={() => onSectionChange(idx)}
-            className="flex flex-col items-center gap-2 group"
+            className="flex flex-col items-center gap-1.5 group"
           >
             {/* Indicator bar */}
             <motion.div
               animate={{
-                width: isActive ? 22 : 6,
+                width: isActive ? 22 : 5,
                 backgroundColor: isActive
                   ? "rgba(255,255,255,0.75)"
                   : "rgba(255,255,255,0.25)",
@@ -35,9 +35,9 @@ export default function ControlStrip({ sections, sectionIndex, onSectionChange }
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               style={{ height: 2, borderRadius: 1 }}
             />
-            {/* Label */}
+            {/* Label — hidden on mobile to keep strip compact */}
             <span
-              className={`text-[9px] tracking-[0.2em] uppercase transition-colors duration-200 ${
+              className={`hidden md:block text-[9px] tracking-[0.2em] uppercase transition-colors duration-200 ${
                 isActive
                   ? "text-white/65"
                   : "text-white/32 group-hover:text-white/50"

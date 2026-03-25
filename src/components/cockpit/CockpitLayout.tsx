@@ -20,7 +20,17 @@ const COCKPIT_SECTIONS: { id: SectionId; label: string }[] = [
 export default function CockpitLayout() {
   const [sectionIndex, setSectionIndex] = useState(0);
   const [direction, setDirection]       = useState<1 | -1>(1);
+  const [compact, setCompact]           = useState(false);
   const activeSection = COCKPIT_SECTIONS[sectionIndex];
+
+  // Detect mobile for compact wheel sizing
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    setCompact(mq.matches);
+    const h = (e: MediaQueryListEvent) => setCompact(e.matches);
+    mq.addEventListener("change", h);
+    return () => mq.removeEventListener("change", h);
+  }, []);
 
   const handleSectionChange = (newIdx: number) => {
     if (newIdx === sectionIndex) return;
@@ -48,16 +58,14 @@ export default function CockpitLayout() {
       className="w-screen h-screen flex flex-col overflow-hidden select-none"
       style={{ background: "#000" }}
     >
-
       {/* ── Windshield ───────────────────────────────────────────────────────── */}
       <div
-        className="w-full flex-shrink-0 flex flex-col items-center justify-center gap-2.5"
+        className="w-full flex-shrink-0 flex flex-col items-center justify-center gap-2 h-[15vh] md:h-[26vh]"
         style={{
-          height: "26vh",
           background: "linear-gradient(to bottom, #1d1d1d 0%, #181818 70%, #141414 100%)",
         }}
       >
-        <h1 className="text-3xl font-bold tracking-[0.35em] uppercase text-white/90">
+        <h1 className="text-2xl md:text-3xl font-bold tracking-[0.35em] uppercase text-white/90">
           David Chang
         </h1>
 
@@ -74,7 +82,7 @@ export default function CockpitLayout() {
             animate="center"
             exit="exit"
             transition={{ duration: 0.22, ease: "easeInOut" }}
-            className="text-[10px] tracking-[0.45em] uppercase font-light"
+            className="text-[9px] md:text-[10px] tracking-[0.45em] uppercase font-light"
             style={{ color: "rgba(255,255,255,0.55)" }}
           >
             {activeSection.label}
@@ -84,9 +92,8 @@ export default function CockpitLayout() {
 
       {/* ── Dashboard lip ────────────────────────────────────────────────────── */}
       <div
-        className="w-full flex-shrink-0"
+        className="w-full flex-shrink-0 h-[8px] md:h-[11px]"
         style={{
-          height: "11px",
           background: "linear-gradient(to bottom, #070707, #0e0e0e)",
           borderTop: "1px solid rgba(255,255,255,0.09)",
         }}
@@ -94,23 +101,20 @@ export default function CockpitLayout() {
 
       {/* ── Cockpit row ──────────────────────────────────────────────────────── */}
       <div
-        className="flex-1 min-h-0 flex"
-        style={{ background: "#111", padding: "2.5rem 4rem" }}
+        className="flex-1 min-h-0 flex flex-col md:flex-row p-4 md:px-16 md:py-10"
+        style={{ background: "#111" }}
       >
-
-        {/* Left: Steering wheel */}
-        <div
-          className="flex-shrink-0 flex items-center justify-center"
-          style={{ width: "36%" }}
-        >
+        {/* Steering wheel — top on mobile, left column on desktop */}
+        <div className="flex-shrink-0 flex items-center justify-center pb-3 md:pb-0 md:w-[36%]">
           <SteeringWheel
             sectionIndex={sectionIndex}
             onSectionChange={handleSectionChange}
+            compact={compact}
           />
         </div>
 
-        {/* Center: Dashboard + control strip */}
-        <div className="flex flex-col" style={{ width: "40%" }}>
+        {/* Dashboard + control strip — center */}
+        <div className="flex-1 min-h-0 flex flex-col md:flex-none md:w-[40%]">
           <div className="flex-1 min-h-0">
             <DashboardScreen
               sectionId={activeSection.id}
@@ -125,11 +129,8 @@ export default function CockpitLayout() {
           />
         </div>
 
-        {/* Right: vertical section navigator */}
-        <div
-          className="flex-shrink-0 flex items-center justify-end"
-          style={{ width: "24%", paddingRight: "0.5rem" }}
-        >
+        {/* Right: vertical section navigator — desktop only */}
+        <div className="hidden md:flex flex-shrink-0 items-center justify-end md:w-[24%] pr-2">
           <div className="flex flex-col gap-3">
             {COCKPIT_SECTIONS.map((section, idx) => (
               <button
@@ -161,7 +162,6 @@ export default function CockpitLayout() {
             ))}
           </div>
         </div>
-
       </div>
     </div>
   );

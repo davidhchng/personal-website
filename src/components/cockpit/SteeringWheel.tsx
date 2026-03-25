@@ -1,13 +1,11 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useId, useRef, useEffect } from "react";
 import { motion, useMotionValue, animate } from "framer-motion";
 
 // 30° between each of 7 sections
 const SECTION_ANGLES: number[] = [-90, -60, -30, 0, 30, 60, 90];
 const SECTION_COUNT = SECTION_ANGLES.length;
-
-// Midpoints between adjacent sections
 const THRESHOLDS = [-75, -45, -15, 15, 45, 75];
 
 function angleToSection(deg: number): number {
@@ -23,9 +21,11 @@ function angleToSection(deg: number): number {
 interface SteeringWheelProps {
   sectionIndex: number;
   onSectionChange: (index: number) => void;
+  compact?: boolean;
 }
 
-export default function SteeringWheel({ sectionIndex, onSectionChange }: SteeringWheelProps) {
+export default function SteeringWheel({ sectionIndex, onSectionChange, compact = false }: SteeringWheelProps) {
+  const uid = useId().replace(/:/g, "_");
   const containerRef      = useRef<HTMLDivElement>(null);
   const isDragging        = useRef(false);
   const hasMoved          = useRef(false);
@@ -35,7 +35,6 @@ export default function SteeringWheel({ sectionIndex, onSectionChange }: Steerin
   const dragStartRotation = useRef(0);
   const rotation          = useMotionValue(SECTION_ANGLES[0]);
 
-  // Sync externally-driven changes (keyboard / panels) — skip during drag
   useEffect(() => {
     if (isDragging.current) return;
     animate(rotation, SECTION_ANGLES[sectionIndex], {
@@ -71,13 +70,9 @@ export default function SteeringWheel({ sectionIndex, onSectionChange }: Steerin
     let delta = currentAngle - dragStartAngle.current;
     if (delta >  180) delta -= 360;
     if (delta < -180) delta += 360;
-
     if (Math.abs(delta) > 6) hasMoved.current = true;
-
     const clamped = Math.max(-105, Math.min(105, dragStartRotation.current + delta));
     rotation.set(clamped);
-
-    // Live section update — dashboard responds as you spin
     onSectionChange(angleToSection(clamped));
   };
 
@@ -89,15 +84,11 @@ export default function SteeringWheel({ sectionIndex, onSectionChange }: Steerin
       const now = Date.now();
       const isDoubleTap = now - lastTapTime.current < 350;
       lastTapTime.current = now;
-
       if (isDoubleTap) {
-        // Double-tap anywhere → return to first section (About)
         animate(rotation, SECTION_ANGLES[0], { type: "spring", stiffness: 170, damping: 22 });
         onSectionChange(0);
         return;
       }
-
-      // Single tap — left half = prev, right half = next
       if (!containerRef.current) return;
       const rect    = containerRef.current.getBoundingClientRect();
       const current = angleToSection(rotation.get());
@@ -109,7 +100,6 @@ export default function SteeringWheel({ sectionIndex, onSectionChange }: Steerin
       return;
     }
 
-    // Drag release — snap to nearest angle
     const current    = rotation.get();
     const nearestIdx = SECTION_ANGLES.reduce(
       (best, angle, idx) =>
@@ -126,14 +116,22 @@ export default function SteeringWheel({ sectionIndex, onSectionChange }: Steerin
     if (delta < -20) onSectionChange(Math.max(0, sectionIndex - 1));
   };
 
-  return (
-    <div className="flex flex-col items-center gap-5">
+  const ringGradId   = `${uid}ring`;
+  const spokeGradId  = `${uid}spoke`;
+  const hubGradId    = `${uid}hub`;
+  const hubDotGradId = `${uid}hubdot`;
 
-      {/* Wheel */}
+  return (
+    <div className="flex flex-col items-center gap-3 md:gap-5">
+      {/* Wheel — perspective container gives the 3D tilt */}
       <div
         ref={containerRef}
-        className="cursor-grab active:cursor-grabbing transition-[filter] duration-200 hover:brightness-125"
-        style={{ width: "min(230px, 90%)", aspectRatio: "1" }}
+        className="cursor-grab active:cursor-grabbing hover:brightness-125 transition-[filter] duration-200"
+        style={{
+          width: compact ? "min(148px, 72%)" : "min(230px, 90%)",
+          aspectRatio: "1",
+          touchAction: "none",
+        }}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={snapToNearest}
@@ -144,42 +142,69 @@ export default function SteeringWheel({ sectionIndex, onSectionChange }: Steerin
           viewBox="0 0 200 200"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          style={{ rotate: rotation, width: "100%", height: "100%", display: "block" }}
+          style={{
+            rotate: rotation,
+            filter: "drop-shadow(0 6px 18px rgba(0,0,0,0.95))",
+            width: "100%",
+            height: "100%",
+            display: "block",
+          }}
         >
-          {/* Outer ring */}
-          <circle cx="100" cy="100" r="88" stroke="#646464" strokeWidth="16" />
+          <defs>
+            {/* Ring — lighter at top, darker at bottom (simulates round grip in overhead light) */}
+            <linearGradient id={ringGradId} x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stopColor="#969696" />
+              <stop offset="38%"  stopColor="#646464" />
+              <stop offset="100%" stopColor="#323232" />
+            </linearGradient>
+            {/* Spokes — same lighting direction */}
+            <linearGradient id={spokeGradId} x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stopColor="#848484" />
+              <stop offset="100%" stopColor="#3a3a3a" />
+            </linearGradient>
+            {/* Hub — radial highlight to simulate a convex surface */}
+            <radialGradient id={hubGradId} cx="38%" cy="32%" r="68%">
+              <stop offset="0%"   stopColor="#787878" />
+              <stop offset="55%"  stopColor="#2a2a2a" />
+              <stop offset="100%" stopColor="#121212" />
+            </radialGradient>
+            {/* Hub centre dot */}
+            <radialGradient id={hubDotGradId} cx="35%" cy="30%" r="70%">
+              <stop offset="0%"   stopColor="#606060" />
+              <stop offset="100%" stopColor="#1c1c1c" />
+            </radialGradient>
+          </defs>
+
+          {/* Outer grip ring */}
+          <circle cx="100" cy="100" r="86" stroke={`url(#${ringGradId})`} strokeWidth="14" />
 
           {/* Inner accent ring */}
-          <circle cx="100" cy="100" r="76" stroke="#3c3c3c" strokeWidth="1.5" />
+          <circle cx="100" cy="100" r="79" stroke="#3a3a3a" strokeWidth="1" />
 
-          {/*
-            Spokes — 120° apart, hub edge r=16, outer end r=78
-              Top:          (100, 84) → (100, 22)
-              Bottom-right: (100+0.866×16, 100+0.5×16) = (113.9, 108) → (100+0.866×78, 100+0.5×78) = (167.5, 139)
-              Bottom-left:  (86.1, 108) → (32.5, 139)
-          */}
-          <line x1="100"  y1="84"  x2="100"  y2="22"  stroke="#646464" strokeWidth="9" strokeLinecap="round" />
-          <line x1="113.9" y1="108" x2="167.5" y2="139" stroke="#646464" strokeWidth="9" strokeLinecap="round" />
-          <line x1="86.1"  y1="108" x2="32.5"  y2="139" stroke="#646464" strokeWidth="9" strokeLinecap="round" />
+          {/* Top spoke */}
+          <line x1="100"  y1="72"  x2="100"  y2="24"  stroke={`url(#${spokeGradId})`} strokeWidth="10" strokeLinecap="round" />
+          {/* Bottom-right spoke */}
+          <line x1="119"  y1="113" x2="167"  y2="141" stroke={`url(#${spokeGradId})`} strokeWidth="10" strokeLinecap="round" />
+          {/* Bottom-left spoke */}
+          <line x1="81"   y1="113" x2="33"   y2="141" stroke={`url(#${spokeGradId})`} strokeWidth="10" strokeLinecap="round" />
 
-          {/* Center hub */}
-          <circle cx="100" cy="100" r="16" fill="#282828" stroke="#565656" strokeWidth="2" />
+          {/* Centre hub */}
+          <circle cx="100" cy="100" r="26" fill={`url(#${hubGradId})`} stroke="rgba(255,255,255,0.08)" strokeWidth="1.5" />
 
-          {/* Hub detail */}
-          <circle cx="100" cy="100" r="5.5" fill="#383838" />
+          {/* Hub detail dot */}
+          <circle cx="100" cy="100" r="9" fill={`url(#${hubDotGradId})`} />
         </motion.svg>
       </div>
 
       {/* Instructions */}
-      <div className="flex flex-col items-center gap-1.5 text-center">
-        <p className="text-white/60 text-[10px] tracking-[0.18em] uppercase">
+      <div className="flex flex-col items-center gap-1 md:gap-1.5 text-center">
+        <p className="text-white/60 text-[9px] md:text-[10px] tracking-[0.18em] uppercase">
           drag · tap sides · scroll
         </p>
-        <p className="text-white/32 text-[9px] tracking-[0.15em] uppercase">
-          ← → keys · 1–6 to jump · double-tap to reset
+        <p className="text-white/32 text-[8px] md:text-[9px] tracking-[0.12em] uppercase">
+          ← → keys · 1–7 to jump · double-tap to reset
         </p>
       </div>
-
     </div>
   );
 }

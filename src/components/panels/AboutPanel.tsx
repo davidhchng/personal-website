@@ -15,10 +15,6 @@ export default function AboutPanel() {
         research practices.
       </p>
 
-      <p className="text-white/70 text-sm leading-relaxed">
-        I drive a white 2011 Mitsubishi Lancer ES and I&apos;m not sorry about it.
-      </p>
-
       <div className="border-t border-white/10 pt-5 space-y-3">
         <p className="text-white/30 text-[10px] tracking-widest uppercase">Education</p>
         <div className="flex justify-between items-baseline">
