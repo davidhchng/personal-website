@@ -21,7 +21,7 @@ const PROJECTS: Project[] = [
     description:
       "Full-stack coaching tool routing late-game decisions through 8 deterministic statistical engines across 880,000+ clutch events from 5 NBA seasons. Includes a Shot Form Analyzer that uses MediaPipe Pose and OpenCV to score 5 biomechanical metrics from uploaded video — returning an annotated skeleton overlay with GPT-4o coaching feedback.",
     tags: ["FastAPI", "SQLite", "MediaPipe", "OpenCV", "Next.js", "GPT-4o", "Railway", "Vercel"],
-    url: "https://shoulder-coach-1.vercel.app",
+    url: "https://github.com/davidhchng/ShoulderCoach",
   },
   {
     name: "MiniMemo — Analysis & Report Creator",
