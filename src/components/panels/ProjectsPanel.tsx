@@ -5,6 +5,7 @@ interface Project {
   description: string;
   tags: string[];
   url: string;
+  video?: string; // URL to mp4, or "" for placeholder
 }
 
 interface HackProject {
@@ -21,7 +22,8 @@ const PROJECTS: Project[] = [
     description:
       "Full-stack coaching tool routing late-game decisions through 8 deterministic statistical engines across 880,000+ clutch events from 5 NBA seasons. Includes a Shot Form Analyzer that uses MediaPipe Pose and OpenCV to score 5 biomechanical metrics from uploaded video — returning an annotated skeleton overlay with GPT-4o coaching feedback.",
     tags: ["FastAPI", "SQLite", "MediaPipe", "OpenCV", "Next.js", "GPT-4o", "Railway", "Vercel"],
-    url: "https://github.com/davidhchng/ShoulderCoach",
+    url: "https://shoulder-coach-1.vercel.app",
+    video: "/exampleShoulderCoach.mov",
   },
   {
     name: "MiniMemo — Analysis & Report Creator",
@@ -29,6 +31,7 @@ const PROJECTS: Project[] = [
       "Full-stack deployed tool that auto-classifies columns and generates statistical insights across 6 analysis types (group deviation, skewness, outlier detection, correlation, time trend). Supports 6 file formats up to 200k rows with SHA256-keyed LRU caching and an optional LLM narrative layer.",
     tags: ["Python", "FastAPI", "Pandas", "Next.js", "TypeScript"],
     url: "https://github.com/davidhchng/MiniMemo",
+    video: "/MiniMemoExample.mov",
   },
   {
     name: "Vancouver Business Registration Market Analysis",
@@ -88,14 +91,56 @@ function ArrowIcon() {
   );
 }
 
+function VideoPreview({ src }: { src: string }) {
+  if (src) {
+    return (
+      <div className="relative w-full aspect-video mb-3 border border-white/10 overflow-hidden bg-black">
+        <video
+          src={src}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+        />
+      </div>
+    );
+  }
+
+  // Placeholder
+  return (
+    <div className="relative w-full aspect-video mb-3 border border-white/10 overflow-hidden bg-white/[0.02] flex items-center justify-center">
+      {/* subtle grid */}
+      <div
+        className="absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
+          backgroundSize: "20px 20px",
+        }}
+      />
+      {/* play button */}
+      <div className="relative flex flex-col items-center gap-2 opacity-20 group-hover:opacity-40 transition-opacity duration-200">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <circle cx="14" cy="14" r="13" stroke="white" strokeWidth="1" />
+          <path d="M11 9.5L20 14L11 18.5V9.5Z" fill="white" />
+        </svg>
+        <span className="text-white text-[9px] tracking-widest uppercase">Preview</span>
+      </div>
+    </div>
+  );
+}
+
 export default function ProjectsPanel() {
   return (
     <div className="space-y-8">
       {/* Main projects */}
-      <ul className="space-y-7">
-        {PROJECTS.map((project) => (
+      <ul className="space-y-10">
+        {PROJECTS.map((project, i) => (
           <li key={project.name} className="group">
+            {i !== 0 && <div className="w-full border-t border-white/10 mb-10" />}
             <a href={project.url} target="_blank" rel="noopener noreferrer" className="block">
+              {project.video !== undefined && <VideoPreview src={project.video} />}
               <div className="flex items-start justify-between gap-3 mb-1">
                 <span className="text-white text-sm font-medium group-hover:text-white/70 transition-colors duration-200 leading-snug">
                   {project.name}
