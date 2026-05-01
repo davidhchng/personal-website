@@ -16,11 +16,6 @@ const HOBBIES = [
     detail: "I love Shai, but not as much as Lebron.",
     tags: ["advanced metrics", "basketball"],
   },
-  {
-    name: "AI-assisted workflows",
-    detail: "",
-    tags: ["LLMs", "automation", "tooling"],
-  },
 ];
 
 export default function HobbiesPanel() {

@@ -20,9 +20,11 @@ const SKILL_GROUPS = [
 ];
 
 const COURSEWORK = [
-  { name: "Integral Calculus",         grade: "94%" },
-  { name: "Intro to Data Science",     grade: "89%" },
-  { name: "Systematic Program Design", grade: "90%" },
+  { name: "Statistical Inference for Data Science", grade: "95%" },
+  { name: "Software Construction",                  grade: "93%" },
+  { name: "Integral Calculus",                      grade: "94%" },
+  { name: "Intro to Data Science",                  grade: "89%" },
+  { name: "Systematic Program Design",              grade: "90%" },
 ];
 
 export default function SkillsPanel() {

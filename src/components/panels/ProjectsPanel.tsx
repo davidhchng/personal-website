@@ -18,7 +18,7 @@ interface HackProject {
 
 const PROJECTS: Project[] = [
   {
-    name: "ShoulderCoach — Basketball Decision Assistant",
+    name: "ShoulderCoach: Basketball Decision Assistant",
     description:
       "Full-stack coaching tool routing late-game decisions through 8 deterministic statistical engines across 880,000+ clutch events from 5 NBA seasons. Includes a Shot Form Analyzer that uses MediaPipe Pose and OpenCV to score 5 biomechanical metrics from uploaded video — returning an annotated skeleton overlay with GPT-4o coaching feedback.",
     tags: ["FastAPI", "SQLite", "MediaPipe", "OpenCV", "Next.js", "GPT-4o", "Railway", "Vercel"],
@@ -26,7 +26,7 @@ const PROJECTS: Project[] = [
     video: "/exampleShoulderCoach.mov",
   },
   {
-    name: "MiniMemo — Analysis & Report Creator",
+    name: "MiniMemo: Analysis & Report Creator",
     description:
       "Full-stack deployed tool that auto-classifies columns and generates statistical insights across 6 analysis types (group deviation, skewness, outlier detection, correlation, time trend). Supports 6 file formats up to 200k rows with SHA256-keyed LRU caching and an optional LLM narrative layer.",
     tags: ["Python", "FastAPI", "Pandas", "Next.js", "TypeScript"],
