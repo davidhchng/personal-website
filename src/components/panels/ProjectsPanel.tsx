@@ -5,7 +5,7 @@ interface Project {
   description: string;
   tags: string[];
   url: string;
-  video?: string; // URL to mp4, or "" for placeholder
+  video?: string;
 }
 
 interface HackProject {
@@ -85,7 +85,7 @@ const HACKATHONS: HackProject[] = [
 
 function ArrowIcon() {
   return (
-    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="text-white/20 group-hover:text-white/60 transition-colors duration-200 flex-shrink-0 mt-0.5">
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="transition-colors duration-200 flex-shrink-0 mt-0.5" style={{ color: "rgba(0,0,0,0.2)" }}>
       <path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" strokeWidth="1.2" />
     </svg>
   );
@@ -94,38 +94,41 @@ function ArrowIcon() {
 function VideoPreview({ src }: { src: string }) {
   if (src) {
     return (
-      <div className="relative w-full aspect-video mb-3 border border-white/10 overflow-hidden bg-black">
+      <div
+        className="relative w-full aspect-video mb-3 overflow-hidden"
+        style={{ border: "1px solid rgba(0,0,0,0.08)", background: "#000" }}
+      >
         <video
           src={src}
           autoPlay
           muted
           loop
           playsInline
-          className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+          className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
         />
       </div>
     );
   }
 
-  // Placeholder
   return (
-    <div className="relative w-full aspect-video mb-3 border border-white/10 overflow-hidden bg-white/[0.02] flex items-center justify-center">
-      {/* subtle grid */}
+    <div
+      className="relative w-full aspect-video mb-3 flex items-center justify-center"
+      style={{ border: "1px solid rgba(0,0,0,0.08)", background: "rgba(0,0,0,0.02)" }}
+    >
       <div
         className="absolute inset-0 opacity-[0.04]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
+            "linear-gradient(rgba(0,0,0,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.5) 1px, transparent 1px)",
           backgroundSize: "20px 20px",
         }}
       />
-      {/* play button */}
       <div className="relative flex flex-col items-center gap-2 opacity-20 group-hover:opacity-40 transition-opacity duration-200">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-          <circle cx="14" cy="14" r="13" stroke="white" strokeWidth="1" />
-          <path d="M11 9.5L20 14L11 18.5V9.5Z" fill="white" />
+          <circle cx="14" cy="14" r="13" stroke="rgba(0,0,0,0.6)" strokeWidth="1" />
+          <path d="M11 9.5L20 14L11 18.5V9.5Z" fill="rgba(0,0,0,0.6)" />
         </svg>
-        <span className="text-white text-[9px] tracking-widest uppercase">Preview</span>
+        <span className="text-[9px] tracking-widest uppercase" style={{ color: "#86868B" }}>Preview</span>
       </div>
     </div>
   );
@@ -138,19 +141,23 @@ export default function ProjectsPanel() {
       <ul className="space-y-10">
         {PROJECTS.map((project, i) => (
           <li key={project.name} className="group">
-            {i !== 0 && <div className="w-full border-t border-white/10 mb-10" />}
+            {i !== 0 && <div className="w-full mb-10" style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }} />}
             <a href={project.url} target="_blank" rel="noopener noreferrer" className="block">
               {project.video !== undefined && <VideoPreview src={project.video} />}
               <div className="flex items-start justify-between gap-3 mb-1">
-                <span className="text-white text-sm font-medium group-hover:text-white/70 transition-colors duration-200 leading-snug">
+                <span className="text-sm font-medium leading-snug transition-colors duration-200 group-hover:opacity-60" style={{ color: "#1D1D1F" }}>
                   {project.name}
                 </span>
                 <ArrowIcon />
               </div>
-              <p className="text-white/50 text-xs leading-relaxed mb-2">{project.description}</p>
+              <p className="text-xs leading-relaxed mb-2" style={{ color: "#6E6E73" }}>{project.description}</p>
               <div className="flex gap-2 flex-wrap">
                 {project.tags.map((tag) => (
-                  <span key={tag} className="text-white/35 text-[10px] border border-white/12 px-2 py-0.5">
+                  <span
+                    key={tag}
+                    className="text-[10px] px-2 py-0.5"
+                    style={{ color: "#86868B", border: "1px solid rgba(0,0,0,0.08)" }}
+                  >
                     {tag}
                   </span>
                 ))}
@@ -161,23 +168,27 @@ export default function ProjectsPanel() {
       </ul>
 
       {/* Hackathons & Datathons */}
-      <div className="border-t border-white/10 pt-6">
-        <p className="text-white/30 text-[10px] tracking-widest uppercase mb-5">Hackathons & Datathons</p>
+      <div className="pt-6" style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+        <p className="text-[10px] tracking-widest uppercase mb-5" style={{ color: "#86868B" }}>Hackathons & Datathons</p>
         <ul className="space-y-6">
           {HACKATHONS.map((h) => (
             <li key={h.name} className="group">
               <a href={h.url} target="_blank" rel="noopener noreferrer" className="block">
                 <div className="flex items-start justify-between gap-3 mb-0.5">
-                  <span className="text-white text-sm font-medium group-hover:text-white/70 transition-colors duration-200 leading-snug">
+                  <span className="text-sm font-medium leading-snug transition-colors duration-200 group-hover:opacity-60" style={{ color: "#1D1D1F" }}>
                     {h.name}
                   </span>
                   <ArrowIcon />
                 </div>
-                <p className="text-white/28 text-[10px] tracking-wider mb-1.5">{h.event}</p>
-                <p className="text-white/50 text-xs leading-relaxed mb-2">{h.description}</p>
+                <p className="text-[10px] tracking-wider mb-1.5" style={{ color: "#86868B" }}>{h.event}</p>
+                <p className="text-xs leading-relaxed mb-2" style={{ color: "#6E6E73" }}>{h.description}</p>
                 <div className="flex gap-2 flex-wrap">
                   {h.tags.map((tag) => (
-                    <span key={tag} className="text-white/30 text-[10px] border border-white/10 px-2 py-0.5">
+                    <span
+                      key={tag}
+                      className="text-[10px] px-2 py-0.5"
+                      style={{ color: "#86868B", border: "1px solid rgba(0,0,0,0.08)" }}
+                    >
                       {tag}
                     </span>
                   ))}

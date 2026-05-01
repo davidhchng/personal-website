@@ -1,5 +1,5 @@
-import CockpitLayout from "@/components/cockpit/CockpitLayout";
+import PortfolioLayout from "@/components/portfolio/PortfolioLayout";
 
 export default function Home() {
-  return <CockpitLayout />;
+  return <PortfolioLayout />;
 }

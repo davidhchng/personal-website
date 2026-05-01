@@ -21,7 +21,7 @@ const LINKS = [
 export default function ContactPanel() {
   return (
     <div>
-      <p className="text-white/55 text-sm leading-relaxed mb-8">
+      <p className="text-sm leading-relaxed mb-8" style={{ color: "#6E6E73" }}>
         Open to interesting conversations, data collaborations, and opportunities.
         Best reached by email.
       </p>
@@ -29,14 +29,15 @@ export default function ContactPanel() {
       <ul className="space-y-6">
         {LINKS.map((link) => (
           <li key={link.label}>
-            <p className="text-white/32 text-[10px] tracking-widest uppercase mb-1.5">
+            <p className="text-[10px] tracking-widest uppercase mb-1.5" style={{ color: "#86868B" }}>
               {link.label}
             </p>
             <a
               href={link.href}
               target={link.href.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
-              className="text-white text-sm border-b border-white/20 hover:border-white/60 transition-colors duration-200 pb-0.5"
+              className="text-sm pb-0.5 transition-colors duration-200"
+              style={{ color: "#1D1D1F", borderBottom: "1px solid rgba(0,0,0,0.15)" }}
             >
               {link.value}
             </a>
@@ -44,8 +45,8 @@ export default function ContactPanel() {
         ))}
       </ul>
 
-      <div className="border-t border-white/10 mt-8 pt-5">
-        <p className="text-white/28 text-xs">Langley, BC · (236) 975-5855</p>
+      <div className="mt-8 pt-5" style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+        <p className="text-xs" style={{ color: "#86868B" }}>Langley, BC · (236) 975-5855</p>
       </div>
     </div>
   );

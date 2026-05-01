@@ -40,18 +40,18 @@ export default function VolunteeringPanel() {
         {VOLUNTEERING.map((item) => (
           <li key={item.org} className="flex gap-4">
             <div className="flex flex-col items-center pt-1 flex-shrink-0">
-              <div className="w-1.5 h-1.5 rounded-full bg-white/25" />
-              <div className="w-px flex-1 bg-white/6 mt-1.5" />
+              <div className="w-1.5 h-1.5 rounded-full" style={{ background: "rgba(0,0,0,0.15)" }} />
+              <div className="w-px flex-1 mt-1.5" style={{ background: "rgba(0,0,0,0.05)" }} />
             </div>
             <div className="pb-6">
               <div className="flex items-baseline justify-between gap-2 mb-0.5">
-                <span className="text-white text-sm font-medium">{item.role}</span>
-                <span className="text-white/28 text-[10px] tracking-wider flex-shrink-0 tabular-nums">{item.period}</span>
+                <span className="text-sm font-medium" style={{ color: "#1D1D1F" }}>{item.role}</span>
+                <span className="text-[10px] tracking-wider flex-shrink-0 tabular-nums" style={{ color: "#86868B" }}>{item.period}</span>
               </div>
-              <p className="text-white/42 text-xs mb-2">{item.org} · {item.location}</p>
+              <p className="text-xs mb-2" style={{ color: "#86868B" }}>{item.org} · {item.location}</p>
               <ul className="space-y-1">
                 {item.bullets.map((b, i) => (
-                  <li key={i} className="text-white/55 text-xs leading-relaxed">— {b}</li>
+                  <li key={i} className="text-xs leading-relaxed" style={{ color: "#6E6E73" }}>— {b}</li>
                 ))}
               </ul>
             </div>

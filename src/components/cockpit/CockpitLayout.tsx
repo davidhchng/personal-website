@@ -23,7 +23,6 @@ export default function CockpitLayout() {
   const [compact, setCompact]           = useState(false);
   const activeSection = COCKPIT_SECTIONS[sectionIndex];
 
-  // Detect mobile for compact wheel sizing
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
     setCompact(mq.matches);
@@ -38,7 +37,6 @@ export default function CockpitLayout() {
     setSectionIndex(newIdx);
   };
 
-  // Keyboard: ← / → to step, 1–7 to jump directly
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft"  || e.key === "ArrowUp")
@@ -56,16 +54,14 @@ export default function CockpitLayout() {
   return (
     <div
       className="w-screen h-screen flex flex-col overflow-hidden select-none"
-      style={{ background: "#000" }}
+      style={{ background: "#F5F5F7" }}
     >
-      {/* ── Windshield ───────────────────────────────────────────────────────── */}
+      {/* ── Header ───────────────────────────────────────────────────────────── */}
       <div
-        className="w-full flex-shrink-0 flex flex-col items-center justify-center gap-2 h-[15vh] md:h-[26vh]"
-        style={{
-          background: "linear-gradient(to bottom, #1d1d1d 0%, #181818 70%, #141414 100%)",
-        }}
+        className="w-full flex-shrink-0 flex flex-col items-center justify-center gap-2 h-[15vh] md:h-[22vh]"
+        style={{ borderBottom: "1px solid rgba(0,0,0,0.07)" }}
       >
-        <h1 className="text-2xl md:text-3xl font-bold tracking-[0.35em] uppercase text-white/90">
+        <h1 className="text-2xl md:text-3xl font-semibold tracking-[0.25em] uppercase" style={{ color: "#1D1D1F" }}>
           David Chang
         </h1>
 
@@ -83,28 +79,19 @@ export default function CockpitLayout() {
             exit="exit"
             transition={{ duration: 0.22, ease: "easeInOut" }}
             className="text-[9px] md:text-[10px] tracking-[0.45em] uppercase font-light"
-            style={{ color: "rgba(255,255,255,0.55)" }}
+            style={{ color: "#86868B" }}
           >
             {activeSection.label}
           </motion.span>
         </AnimatePresence>
       </div>
 
-      {/* ── Dashboard lip ────────────────────────────────────────────────────── */}
-      <div
-        className="w-full flex-shrink-0 h-[8px] md:h-[11px]"
-        style={{
-          background: "linear-gradient(to bottom, #070707, #0e0e0e)",
-          borderTop: "1px solid rgba(255,255,255,0.09)",
-        }}
-      />
-
       {/* ── Cockpit row ──────────────────────────────────────────────────────── */}
       <div
         className="flex-1 min-h-0 flex flex-col md:flex-row p-4 md:px-16 md:py-10"
-        style={{ background: "#111" }}
+        style={{ background: "#F5F5F7" }}
       >
-        {/* Steering wheel — top on mobile, left column on desktop */}
+        {/* Steering wheel */}
         <div className="flex-shrink-0 flex items-center justify-center pb-3 md:pb-0 md:w-[36%]">
           <SteeringWheel
             sectionIndex={sectionIndex}
@@ -113,7 +100,7 @@ export default function CockpitLayout() {
           />
         </div>
 
-        {/* Dashboard + control strip — center */}
+        {/* Dashboard + control strip */}
         <div className="flex-1 min-h-0 flex flex-col md:flex-none md:w-[40%]">
           <div className="flex-1 min-h-0">
             <DashboardScreen
@@ -143,8 +130,8 @@ export default function CockpitLayout() {
                     width: idx === sectionIndex ? 18 : 4,
                     backgroundColor:
                       idx === sectionIndex
-                        ? "rgba(255,255,255,0.70)"
-                        : "rgba(255,255,255,0.14)",
+                        ? "rgba(0,0,0,0.7)"
+                        : "rgba(0,0,0,0.12)",
                   }}
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   style={{ height: 1.5, borderRadius: 1, flexShrink: 0 }}
@@ -152,8 +139,8 @@ export default function CockpitLayout() {
                 <span
                   className={`text-[9px] tracking-[0.2em] uppercase transition-colors duration-200 ${
                     idx === sectionIndex
-                      ? "text-white/62"
-                      : "text-white/20 group-hover:text-white/44"
+                      ? "text-[#1D1D1F]"
+                      : "text-black/25 group-hover:text-black/50"
                   }`}
                 >
                   {section.label}

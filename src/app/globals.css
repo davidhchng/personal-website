@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
+  --background: #F5F5F7;
+  --foreground: #1D1D1F;
 }
 
 * {
@@ -14,12 +14,11 @@
 html,
 body {
   max-width: 100vw;
-  overflow: hidden;
-  background: #000;
-  color: #fff;
+  background: #F5F5F7;
+  color: #1D1D1F;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif;
 }
 
-/* Smooth scrollbar for dashboard content */
 ::-webkit-scrollbar {
   width: 2px;
 }
@@ -27,6 +26,43 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2a2a2a;
+  background: rgba(0, 0, 0, 0.12);
   border-radius: 1px;
+}
+
+/* ── Bento grid ───────────────────────────────────────────────────────────── */
+
+.bento-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 12px;
+}
+
+/* Card hover transition — handled in CSS so Framer doesn't own the border */
+.bento-card {
+  transition: border-color 0.18s ease, background-color 0.18s ease;
+}
+.bento-card-clickable:hover {
+  border-color: rgba(0, 0, 0, 0.15) !important;
+  background-color: rgba(0, 0, 0, 0.005);
+  cursor: pointer;
+}
+
+/* Desktop: 4-col fixed-height bento */
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    height: calc(100vh - 24px);
+  }
+
+  .card-hero         { grid-column: 1 / 3; grid-row: 1 / 3; }
+  .card-about        { grid-column: 3;     grid-row: 1;      }
+  .card-contact      { grid-column: 4;     grid-row: 1 / 3;  }
+  .card-skills       { grid-column: 3;     grid-row: 2;      }
+  .card-projects     { grid-column: 1 / 3; grid-row: 3 / 5;  }
+  .card-experience   { grid-column: 3 / 5; grid-row: 3;      }
+  .card-hobbies      { grid-column: 3;     grid-row: 4;      }
+  .card-volunteering { grid-column: 4;     grid-row: 4;      }
 }

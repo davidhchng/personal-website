@@ -24,23 +24,21 @@ export default function ControlStrip({ sections, sectionIndex, onSectionChange }
             onClick={() => onSectionChange(idx)}
             className="flex flex-col items-center gap-1.5 group"
           >
-            {/* Indicator bar */}
             <motion.div
               animate={{
                 width: isActive ? 22 : 5,
                 backgroundColor: isActive
-                  ? "rgba(255,255,255,0.75)"
-                  : "rgba(255,255,255,0.25)",
+                  ? "rgba(0,0,0,0.75)"
+                  : "rgba(0,0,0,0.15)",
               }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               style={{ height: 2, borderRadius: 1 }}
             />
-            {/* Label — hidden on mobile to keep strip compact */}
             <span
               className={`hidden md:block text-[9px] tracking-[0.2em] uppercase transition-colors duration-200 ${
                 isActive
-                  ? "text-white/65"
-                  : "text-white/32 group-hover:text-white/50"
+                  ? "text-[#1D1D1F]"
+                  : "text-black/25 group-hover:text-black/50"
               }`}
             >
               {section.label}

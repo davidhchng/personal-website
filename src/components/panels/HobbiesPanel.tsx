@@ -29,15 +29,19 @@ export default function HobbiesPanel() {
       {HOBBIES.map((hobby) => (
         <div key={hobby.name}>
           <div className="flex items-baseline gap-3 mb-1">
-            <span className="text-white text-sm font-medium">{hobby.name}</span>
-            <div className="flex-1 h-px bg-white/8" />
+            <span className="text-sm font-medium" style={{ color: "#1D1D1F" }}>{hobby.name}</span>
+            <div className="flex-1 h-px" style={{ background: "rgba(0,0,0,0.06)" }} />
           </div>
           {hobby.detail && (
-            <p className="text-white/55 text-xs leading-relaxed mb-2">{hobby.detail}</p>
+            <p className="text-xs leading-relaxed mb-2" style={{ color: "#6E6E73" }}>{hobby.detail}</p>
           )}
           <div className="flex gap-2 flex-wrap">
             {hobby.tags.map((tag) => (
-              <span key={tag} className="text-white/32 text-[10px] border border-white/10 px-2 py-0.5">
+              <span
+                key={tag}
+                className="text-[10px] px-2 py-0.5"
+                style={{ color: "#86868B", border: "1px solid rgba(0,0,0,0.08)" }}
+              >
                 {tag}
               </span>
             ))}

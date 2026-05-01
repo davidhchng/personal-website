@@ -30,7 +30,6 @@ const SECTION_LABELS: Partial<Record<SectionId, string>> = {
   contact:      "Contact",
 };
 
-// Content slides in/out matching the direction of wheel rotation
 const contentVariants = {
   enter:  (d: number) => ({ opacity: 0, x: d * 28 }),
   center: { opacity: 1, x: 0 },
@@ -49,19 +48,19 @@ export default function DashboardScreen({ sectionId, sectionIndex, direction }: 
   return (
     <div
       className="w-full h-full flex flex-col rounded-xl overflow-hidden"
-      style={{ background: "#1c1c1c", border: "1px solid #333" }}
+      style={{ background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.08)" }}
     >
       {/* Header */}
       <div
         className="flex items-center justify-between px-5 py-3 flex-shrink-0"
-        style={{ borderBottom: "1px solid #2c2c2c" }}
+        style={{ borderBottom: "1px solid rgba(0,0,0,0.06)" }}
       >
         <div className="flex items-center gap-2.5">
-          <span className="text-white/45 text-[10px] tracking-[0.2em] tabular-nums font-light">
+          <span className="text-[10px] tracking-[0.2em] tabular-nums font-light" style={{ color: "#86868B" }}>
             {String(sectionIndex + 1).padStart(2, "0")}
           </span>
-          <span className="text-white/25 text-[10px]">/</span>
-          <span className="text-white/82 text-[10px] tracking-[0.2em] uppercase font-medium">
+          <span className="text-[10px]" style={{ color: "rgba(0,0,0,0.15)" }}>/</span>
+          <span className="text-[10px] tracking-[0.2em] uppercase font-medium" style={{ color: "#1D1D1F" }}>
             {SECTION_LABELS[sectionId]}
           </span>
         </div>
@@ -71,11 +70,11 @@ export default function DashboardScreen({ sectionId, sectionIndex, direction }: 
           animate={{ opacity: [1, 0.25, 1] }}
           transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
           className="w-1.5 h-1.5 rounded-full"
-          style={{ background: "rgba(255,255,255,0.55)" }}
+          style={{ background: "rgba(0,0,0,0.2)" }}
         />
       </div>
 
-      {/* Scrollable content — slides in the direction of wheel rotation */}
+      {/* Scrollable content */}
       <div className="flex-1 overflow-y-auto min-h-0 px-5 py-4" style={{ position: "relative" }}>
         <AnimatePresence custom={direction} initial={false}>
           <motion.div
