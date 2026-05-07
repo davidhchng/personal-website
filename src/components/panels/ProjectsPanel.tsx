@@ -1,22 +1,18 @@
 "use client";
 
-interface Project {
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+interface ProjectItem {
   name: string;
   description: string;
   tags: string[];
   url: string;
   video?: string;
+  event?: string;
 }
 
-interface HackProject {
-  name: string;
-  event: string;
-  description: string;
-  tags: string[];
-  url: string;
-}
-
-const PROJECTS: Project[] = [
+const VIDEO_PROJECTS: ProjectItem[] = [
   {
     name: "ShoulderCoach: Basketball Decision Assistant",
     description:
@@ -33,6 +29,9 @@ const PROJECTS: Project[] = [
     url: "https://github.com/davidhchng/MiniMemo",
     video: "/MiniMemoExample.mov",
   },
+];
+
+const DATA_PROJECTS: ProjectItem[] = [
   {
     name: "Vancouver Business Registration Market Analysis",
     description:
@@ -56,7 +55,7 @@ const PROJECTS: Project[] = [
   },
 ];
 
-const HACKATHONS: HackProject[] = [
+const HACKATHONS: ProjectItem[] = [
   {
     name: "BridgeCare",
     event: "HackTheCoast 2026",
@@ -85,119 +84,204 @@ const HACKATHONS: HackProject[] = [
 
 function ArrowIcon() {
   return (
-    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="transition-colors duration-200 flex-shrink-0 mt-0.5" style={{ color: "rgba(0,0,0,0.2)" }}>
+    <svg width="9" height="9" viewBox="0 0 10 10" fill="none" style={{ flexShrink: 0, color: "rgba(0,0,0,0.22)" }}>
       <path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" strokeWidth="1.2" />
     </svg>
   );
 }
 
-function VideoPreview({ src }: { src: string }) {
-  if (src) {
-    return (
-      <div
-        className="relative w-full aspect-video mb-3 overflow-hidden"
-        style={{ border: "1px solid rgba(0,0,0,0.08)", background: "#000" }}
-      >
-        <video
-          src={src}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
-        />
-      </div>
-    );
-  }
-
+function ProjectCard({ project, index, onClick }: { project: ProjectItem; index: number; onClick: () => void }) {
   return (
-    <div
-      className="relative w-full aspect-video mb-3 flex items-center justify-center"
-      style={{ border: "1px solid rgba(0,0,0,0.08)", background: "rgba(0,0,0,0.02)" }}
+    <motion.div
+      className="project-card"
+      onClick={onClick}
+      style={{ padding: 18, borderRadius: 4 }}
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.42, ease: "easeOut", delay: index * 0.07 }}
+      whileHover={{ y: -3, transition: { type: "spring", stiffness: 380, damping: 28 } }}
     >
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(0,0,0,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.5) 1px, transparent 1px)",
-          backgroundSize: "20px 20px",
-        }}
-      />
-      <div className="relative flex flex-col items-center gap-2 opacity-20 group-hover:opacity-40 transition-opacity duration-200">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-          <circle cx="14" cy="14" r="13" stroke="rgba(0,0,0,0.6)" strokeWidth="1" />
-          <path d="M11 9.5L20 14L11 18.5V9.5Z" fill="rgba(0,0,0,0.6)" />
-        </svg>
-        <span className="text-[9px] tracking-widest uppercase" style={{ color: "#86868B" }}>Preview</span>
+      {project.video && (
+        <div style={{ aspectRatio: "16/9", overflow: "hidden", background: "#000", marginBottom: 13, borderRadius: 3 }}>
+          <video
+            src={project.video}
+            autoPlay muted loop playsInline
+            style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.88 }}
+          />
+        </div>
+      )}
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 8, marginBottom: 5 }}>
+        <span style={{ fontSize: 12, fontWeight: 500, color: "#1D1D1F", lineHeight: 1.4 }}>{project.name}</span>
+        <ArrowIcon />
       </div>
-    </div>
+      {project.event && (
+        <p style={{ fontSize: 9, color: "#86868B", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 5 }}>
+          {project.event}
+        </p>
+      )}
+      <p className="project-desc-clamp" style={{ fontSize: 11, color: "#6E6E73", lineHeight: 1.6, marginBottom: 10 }}>
+        {project.description}
+      </p>
+      <div style={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
+        {project.tags.slice(0, 4).map(tag => (
+          <span key={tag} style={{ fontSize: 9, color: "#86868B", border: "1px solid rgba(0,0,0,0.08)", padding: "2px 7px" }}>
+            {tag}
+          </span>
+        ))}
+        {project.tags.length > 4 && (
+          <span style={{ fontSize: 9, color: "#ADADB3" }}>+{project.tags.length - 4}</span>
+        )}
+      </div>
+    </motion.div>
+  );
+}
+
+function Modal({ project, onClose }: { project: ProjectItem; onClose: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.18 }}
+      onClick={onClose}
+      style={{
+        position: "fixed", inset: 0, zIndex: 200,
+        background: "rgba(0,0,0,0.24)",
+        backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        padding: 24,
+      }}
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 20, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 10, scale: 0.97 }}
+        transition={{ duration: 0.26, ease: [0.25, 0.46, 0.45, 0.94] }}
+        onClick={e => e.stopPropagation()}
+        style={{
+          background: "#F5F5F7",
+          border: "1px solid rgba(0,0,0,0.09)",
+          borderRadius: 14,
+          maxWidth: 540,
+          width: "100%",
+          maxHeight: "86vh",
+          overflowY: "auto",
+          padding: 32,
+        }}
+      >
+        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
+          <button
+            onClick={onClose}
+            style={{
+              background: "rgba(0,0,0,0.06)", border: "none", cursor: "pointer",
+              width: 26, height: 26, borderRadius: "50%",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: 15, color: "#6E6E73", lineHeight: 1,
+            }}
+          >
+            ×
+          </button>
+        </div>
+
+        {project.video && (
+          <div style={{ aspectRatio: "16/9", overflow: "hidden", borderRadius: 9, marginBottom: 24, background: "#000" }}>
+            <video
+              src={project.video}
+              autoPlay muted loop playsInline
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          </div>
+        )}
+
+        <h3 style={{ fontSize: 18, fontWeight: 600, color: "#1D1D1F", letterSpacing: "-0.02em", lineHeight: 1.25, marginBottom: 8 }}>
+          {project.name}
+        </h3>
+        {project.event && (
+          <p style={{ fontSize: 10, color: "#86868B", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 16 }}>
+            {project.event}
+          </p>
+        )}
+
+        <p style={{ fontSize: 13, color: "#6E6E73", lineHeight: 1.7, marginBottom: 20 }}>
+          {project.description}
+        </p>
+
+        <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 26 }}>
+          {project.tags.map(tag => (
+            <span key={tag} style={{ fontSize: 10, color: "#86868B", border: "1px solid rgba(0,0,0,0.1)", padding: "3px 9px" }}>
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "inline-flex", alignItems: "center", gap: 7,
+            fontSize: 11, color: "#1D1D1F", textDecoration: "none",
+            border: "1px solid rgba(0,0,0,0.18)", padding: "8px 18px",
+            borderRadius: 7, letterSpacing: "0.02em",
+          }}
+        >
+          View Project
+          <ArrowIcon />
+        </a>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function SectionLabel({ children }: { children: string }) {
+  return (
+    <motion.p
+      initial={{ opacity: 0, y: 8 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      style={{ fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: "#86868B", marginBottom: 14 }}
+    >
+      {children}
+    </motion.p>
   );
 }
 
 export default function ProjectsPanel() {
-  return (
-    <div className="space-y-8">
-      {/* Main projects */}
-      <ul className="space-y-10">
-        {PROJECTS.map((project, i) => (
-          <li key={project.name} className="group">
-            {i !== 0 && <div className="w-full mb-10" style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }} />}
-            <a href={project.url} target="_blank" rel="noopener noreferrer" className="block">
-              {project.video !== undefined && <VideoPreview src={project.video} />}
-              <div className="flex items-start justify-between gap-3 mb-1">
-                <span className="text-sm font-medium leading-snug transition-colors duration-200 group-hover:opacity-60" style={{ color: "#1D1D1F" }}>
-                  {project.name}
-                </span>
-                <ArrowIcon />
-              </div>
-              <p className="text-xs leading-relaxed mb-2" style={{ color: "#6E6E73" }}>{project.description}</p>
-              <div className="flex gap-2 flex-wrap">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[10px] px-2 py-0.5"
-                    style={{ color: "#86868B", border: "1px solid rgba(0,0,0,0.08)" }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </a>
-          </li>
-        ))}
-      </ul>
+  const [selected, setSelected] = useState<ProjectItem | null>(null);
 
-      {/* Hackathons & Datathons */}
-      <div className="pt-6" style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }}>
-        <p className="text-[10px] tracking-widest uppercase mb-5" style={{ color: "#86868B" }}>Hackathons & Datathons</p>
-        <ul className="space-y-6">
-          {HACKATHONS.map((h) => (
-            <li key={h.name} className="group">
-              <a href={h.url} target="_blank" rel="noopener noreferrer" className="block">
-                <div className="flex items-start justify-between gap-3 mb-0.5">
-                  <span className="text-sm font-medium leading-snug transition-colors duration-200 group-hover:opacity-60" style={{ color: "#1D1D1F" }}>
-                    {h.name}
-                  </span>
-                  <ArrowIcon />
-                </div>
-                <p className="text-[10px] tracking-wider mb-1.5" style={{ color: "#86868B" }}>{h.event}</p>
-                <p className="text-xs leading-relaxed mb-2" style={{ color: "#6E6E73" }}>{h.description}</p>
-                <div className="flex gap-2 flex-wrap">
-                  {h.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[10px] px-2 py-0.5"
-                      style={{ color: "#86868B", border: "1px solid rgba(0,0,0,0.08)" }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </a>
-            </li>
+  return (
+    <>
+      <div style={{ display: "flex", flexDirection: "column", gap: 52 }}>
+        <div className="projects-grid-video">
+          {VIDEO_PROJECTS.map((p, i) => (
+            <ProjectCard key={p.name} project={p} index={i} onClick={() => setSelected(p)} />
           ))}
-        </ul>
+        </div>
+
+        <div>
+          <SectionLabel>Analysis & Research</SectionLabel>
+          <div className="projects-grid-small">
+            {DATA_PROJECTS.map((p, i) => (
+              <ProjectCard key={p.name} project={p} index={i} onClick={() => setSelected(p)} />
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <SectionLabel>Hackathons & Datathons</SectionLabel>
+          <div className="projects-grid-small">
+            {HACKATHONS.map((p, i) => (
+              <ProjectCard key={p.name} project={p} index={i} onClick={() => setSelected(p)} />
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
+
+      <AnimatePresence>
+        {selected && <Modal key="modal" project={selected} onClose={() => setSelected(null)} />}
+      </AnimatePresence>
+    </>
   );
 }

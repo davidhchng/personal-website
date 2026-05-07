@@ -30,7 +30,49 @@ body {
   border-radius: 1px;
 }
 
-/* ── Bento grid ───────────────────────────────────────────────────────────── */
+/* ── Project bento cards ──────────────────────────────────────────────────── */
+
+.project-card {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fff;
+  transition: border-color 0.18s ease, background 0.18s ease;
+  cursor: pointer;
+}
+.project-card:hover {
+  border-color: rgba(0, 0, 0, 0.18);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.project-desc-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.projects-grid-video {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 520px) {
+  .projects-grid-video {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.projects-grid-small {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 600px) {
+  .projects-grid-small {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ── Legacy bento grid ────────────────────────────────────────────────────── */
 
 .bento-grid {
   display: grid;

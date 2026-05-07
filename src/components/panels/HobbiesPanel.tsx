@@ -12,7 +12,7 @@ const HOBBIES = [
     tags: ["outdoor", "pickup", "Vortex"],
   },
   {
-    name: "NBA Analytics",
+    name: "NBA",
     detail: "I love Shai, but not as much as Lebron.",
     tags: ["advanced metrics", "basketball"],
   },

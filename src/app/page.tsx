@@ -1,5 +1,5 @@
-import PortfolioLayout from "@/components/portfolio/PortfolioLayout";
+import ScrollLayout from "@/components/portfolio/ScrollLayout";
 
 export default function Home() {
-  return <PortfolioLayout />;
+  return <ScrollLayout />;
 }
