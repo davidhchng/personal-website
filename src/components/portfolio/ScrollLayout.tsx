@@ -30,14 +30,14 @@ function SectionContent({ id, isMobile }: { id: string; isMobile: boolean }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.55, ease: "easeOut" }}
-      style={{ padding: px, paddingBottom: 120 }}
+      style={{ paddingTop: 0, paddingLeft: isMobile ? 24 : 64, paddingRight: isMobile ? 24 : 64, paddingBottom: 120 }}
     >
       <div style={{ maxWidth: 800, margin: "0 auto" }}>
         {id === "about" && (
           <>
             <AboutPanel />
             <div style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid rgba(0,0,0,0.07)" }}>
-              <p style={{ fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: "#86868B", marginBottom: 24 }}>
+              <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "#6E6E73", marginBottom: 24 }}>
                 Interests
               </p>
               <HobbiesPanel />
@@ -49,7 +49,7 @@ function SectionContent({ id, isMobile }: { id: string; isMobile: boolean }) {
           <>
             <ExperiencePanel />
             <div style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid rgba(0,0,0,0.07)" }}>
-              <p style={{ fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: "#86868B", marginBottom: 24 }}>
+              <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "#6E6E73", marginBottom: 24 }}>
                 Volunteering
               </p>
               <VolunteeringPanel />
@@ -184,27 +184,27 @@ export default function ScrollLayout() {
               src="/coverphoto.png"
               alt="David (Hanmin) Chang"
               style={{
-                width: isMobile ? 200 : 280,
-                height: isMobile ? 250 : 350,
+                width: isMobile ? 230 : 320,
+                height: isMobile ? 288 : 400,
                 objectFit: "cover",
-                borderRadius: 14,
+                borderRadius: 16,
                 border: "1px solid rgba(0,0,0,0.08)",
-                marginBottom: isMobile ? 24 : 32,
+                marginBottom: isMobile ? 28 : 36,
                 display: "block",
               }}
             />
             <h1 style={{
-              fontSize: isMobile ? "2rem" : "clamp(2rem, 4vw, 3rem)",
-              fontWeight: 600, color: "#1D1D1F",
-              letterSpacing: "-0.03em", lineHeight: 1.06,
-              marginBottom: 14,
+              fontSize: isMobile ? "2.4rem" : "clamp(2.6rem, 5vw, 3.8rem)",
+              fontWeight: 700, color: "#1D1D1F",
+              letterSpacing: "-0.04em", lineHeight: 1.04,
+              marginBottom: 16,
             }}>
               David (Hanmin) Chang
             </h1>
-            <p style={{ fontSize: isMobile ? 13 : 14, color: "#6E6E73", letterSpacing: "0.03em", marginBottom: 10 }}>
+            <p style={{ fontSize: isMobile ? 14 : 16, color: "#6E6E73", fontWeight: 500, letterSpacing: "0.02em", marginBottom: 12 }}>
               Statistics · University of British Columbia
             </p>
-            <p style={{ fontSize: 12, color: "#86868B", lineHeight: 1.7, marginBottom: 32, maxWidth: 340 }}>
+            <p style={{ fontSize: 13, color: "#86868B", lineHeight: 1.7, marginBottom: 36, maxWidth: 360 }}>
               Hi, this is David, and welcome to my portfolio! Enjoy your stay.
             </p>
             <div style={{ display: "flex", gap: isMobile ? 20 : 26 }}>
@@ -270,11 +270,11 @@ export default function ScrollLayout() {
                 display: "flex", alignItems: "center", gap: 12,
               }}
             >
-              <span style={{ fontSize: 10, color: "#ADADB3", letterSpacing: "0.2em" }}>
+              <span style={{ fontSize: 11, color: "#ADADB3", letterSpacing: "0.15em", fontWeight: 400 }}>
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <div style={{ width: 16, height: 1, background: "rgba(0,0,0,0.1)" }} />
-              <span style={{ fontSize: 10, fontWeight: 500, color: "#1D1D1F", letterSpacing: "0.15em", textTransform: "uppercase" }}>
+              <div style={{ width: 18, height: 1, background: "rgba(0,0,0,0.12)" }} />
+              <span style={{ fontSize: 15, fontWeight: 700, color: "#1D1D1F", letterSpacing: "-0.01em" }}>
                 {s.label}
               </span>
             </motion.div>
@@ -286,29 +286,6 @@ export default function ScrollLayout() {
         <div style={{ height: 40 }} />
       </div>
 
-      {/* Progress dots */}
-      <div style={{
-        position: "fixed",
-        bottom: isMobile ? 16 : 22,
-        left: "50%", transform: "translateX(-50%)",
-        display: "flex", gap: isMobile ? 8 : 6, alignItems: "center", zIndex: 50,
-      }}>
-        {SECTIONS.map((_, i) => (
-          <button key={i} onClick={() => scrollTo(i)} style={{
-            background: "none", border: "none", cursor: "pointer",
-            padding: isMobile ? 8 : 4,
-          }}>
-            <motion.div
-              animate={{
-                width: current === i ? 20 : 5,
-                backgroundColor: current === i ? "rgba(0,0,0,0.55)" : "rgba(0,0,0,0.13)",
-              }}
-              transition={{ type: "spring", stiffness: 300, damping: 28 }}
-              style={{ height: 2, borderRadius: 1 }}
-            />
-          </button>
-        ))}
-      </div>
 
     </div>
   );

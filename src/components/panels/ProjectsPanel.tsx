@@ -29,6 +29,14 @@ const VIDEO_PROJECTS: ProjectItem[] = [
     url: "https://github.com/davidhchng/MiniMemo",
     video: "/MiniMemoExample.mov",
   },
+  {
+    name: "Starbucks Offer Completion Predictor",
+    description:
+      "Predicts whether a Starbucks customer will complete a promotional offer. Engineered a labeled training set from 300,000+ raw transaction and event log records across 3 data sources, producing 66,501 (customer, offer) pairs. Benchmarked 4 models — Random Forest achieved 82% test accuracy on 12 engineered features. Exported to ONNX and shipped a fully static prediction app on Vercel using onnxruntime-web for live in-browser inference with no backend required.",
+    tags: ["Python", "pandas", "scikit-learn", "PyTorch", "ONNX", "onnxruntime-web", "HTML/JS", "Vercel"],
+    url: "https://github.com/davidhchng/starbucks-offer-intelligence",
+    video: "/starbucks-offer-intel-video.mov",
+  },
 ];
 
 const DATA_PROJECTS: ProjectItem[] = [
@@ -241,7 +249,7 @@ function SectionLabel({ children }: { children: string }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      style={{ fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: "#86868B", marginBottom: 14 }}
+      style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "#6E6E73", marginBottom: 14 }}
     >
       {children}
     </motion.p>
