@@ -44,7 +44,7 @@ function RoleItem({ item }: { item: Role }) {
         <div className="w-2 h-2 rounded-full" style={{ background: "rgba(0,0,0,0.18)" }} />
         <div className="w-px flex-1 mt-2" style={{ background: "rgba(0,0,0,0.07)" }} />
       </div>
-      <div className="pb-9">
+      <div className="pb-9 flex-1 min-w-0">
         <div className="flex items-baseline justify-between gap-3 mb-1">
           <span className="text-base font-semibold" style={{ color: "#1D1D1F" }}>{item.role}</span>
           <span className="text-xs tracking-wider flex-shrink-0 tabular-nums" style={{ color: "#86868B" }}>{item.period}</span>

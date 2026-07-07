@@ -262,17 +262,24 @@ function Modal({ project, onClose }: { project: ProjectItem; onClose: () => void
   );
 }
 
-function SectionLabel({ children }: { children: string }) {
+function SectionLabel({ children, caption }: { children: string; caption?: string }) {
   return (
-    <motion.p
+    <motion.div
       initial={{ opacity: 0, y: 8 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      style={{ fontSize: "clamp(1.4rem, 2.6vw, 1.9rem)", fontWeight: 800, letterSpacing: "-0.02em", color: "#1D1D1F", marginBottom: 20 }}
+      style={{ marginBottom: 20 }}
     >
-      {children}
-    </motion.p>
+      <p style={{ fontSize: "clamp(1.4rem, 2.6vw, 1.9rem)", fontWeight: 800, letterSpacing: "-0.02em", color: "#1D1D1F", marginBottom: caption ? 8 : 0 }}>
+        {children}
+      </p>
+      {caption && (
+        <p style={{ fontSize: 13, color: "#86868B", lineHeight: 1.5, maxWidth: 560 }}>
+          {caption}
+        </p>
+      )}
+    </motion.div>
   );
 }
 
@@ -306,7 +313,7 @@ export default function ProjectsPanel() {
         </div>
 
         <div>
-          <SectionLabel>LLM-Powered Projects</SectionLabel>
+          <SectionLabel caption="Projects where I tested the limits and capabilities of using AI to assist with user experience and analysis:">AI-Assisted Projects</SectionLabel>
           <div className="projects-grid-video">
             {LLM_PROJECTS.map((p, i) => (
               <ProjectCard key={p.name} project={p} index={i} onClick={() => setSelected(p)} />
