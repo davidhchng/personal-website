@@ -2,19 +2,16 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
-import AboutPanel        from "@/components/panels/AboutPanel";
 import ProjectsPanel     from "@/components/panels/ProjectsPanel";
 import SkillsPanel       from "@/components/panels/SkillsPanel";
 import ExperiencePanel   from "@/components/panels/ExperiencePanel";
 import VolunteeringPanel from "@/components/panels/VolunteeringPanel";
-import HobbiesPanel      from "@/components/panels/HobbiesPanel";
 import ContactPanel      from "@/components/panels/ContactPanel";
 
 const NAV_H = 52;
 
 const SECTIONS = [
   { id: "intro",      label: null         },
-  { id: "about",      label: "About"      },
   { id: "projects",   label: "Projects"   },
   { id: "experience", label: "Experience" },
   { id: "skills",     label: "Skills"     },
@@ -32,24 +29,13 @@ function SectionContent({ id, isMobile }: { id: string; isMobile: boolean }) {
       transition={{ duration: 0.55, ease: "easeOut" }}
       style={{ paddingTop: 0, paddingLeft: isMobile ? 24 : 64, paddingRight: isMobile ? 24 : 64, paddingBottom: 120 }}
     >
-      <div style={{ maxWidth: 800, margin: "0 auto" }}>
-        {id === "about" && (
-          <>
-            <AboutPanel />
-            <div style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid rgba(0,0,0,0.07)" }}>
-              <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "#6E6E73", marginBottom: 24 }}>
-                Interests
-              </p>
-              <HobbiesPanel />
-            </div>
-          </>
-        )}
+      <div style={{ maxWidth: id === "projects" ? 1200 : 800, margin: "0 auto" }}>
         {id === "projects"   && <ProjectsPanel />}
         {id === "experience" && (
           <>
             <ExperiencePanel />
             <div style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid rgba(0,0,0,0.07)" }}>
-              <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "#6E6E73", marginBottom: 24 }}>
+              <p style={{ fontSize: "clamp(1.4rem, 2.6vw, 1.9rem)", fontWeight: 800, letterSpacing: "-0.02em", color: "#1D1D1F", marginBottom: 24 }}>
                 Volunteering
               </p>
               <VolunteeringPanel />
@@ -110,14 +96,14 @@ export default function ScrollLayout() {
   const section = SECTIONS[current];
 
   return (
-    <div style={{ width: "100vw", height: "100vh", overflow: "hidden", background: "#F5F5F7", position: "relative" }}>
+    <div style={{ width: "100vw", height: "100vh", overflow: "hidden", background: "#FAF9F6", position: "relative" }}>
 
       {/* Nav */}
       <nav style={{
           position: "fixed", top: 0, left: 0, right: 0, height: NAV_H,
           display: "flex", alignItems: "center", justifyContent: "space-between",
           padding: isMobile ? "0 24px" : "0 64px",
-          background: "rgba(245,245,247,0.9)",
+          background: "rgba(250,249,246,0.9)",
           backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)",
           borderBottom: "1px solid rgba(0,0,0,0.07)",
           zIndex: 100,
@@ -166,7 +152,8 @@ export default function ScrollLayout() {
           style={{
             minHeight: "100vh", paddingTop: NAV_H,
             display: "flex", flexDirection: "column",
-            alignItems: "center", justifyContent: "center",
+            alignItems: "center", justifyContent: "space-between",
+            paddingBottom: isMobile ? 32 : 28,
             position: "relative",
           }}
         >
@@ -175,8 +162,9 @@ export default function ScrollLayout() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.7, ease: "easeOut" }}
             style={{
+              flex: 1,
               display: "flex", flexDirection: "column",
-              alignItems: "center", textAlign: "center",
+              alignItems: "center", justifyContent: "center", textAlign: "center",
               padding: "0 24px",
             }}
           >
@@ -202,7 +190,7 @@ export default function ScrollLayout() {
               David (Hanmin) Chang
             </h1>
             <p style={{ fontSize: isMobile ? 14 : 16, color: "#6E6E73", fontWeight: 500, letterSpacing: "0.02em", marginBottom: 12 }}>
-              Statistics · University of British Columbia
+              Computer Science and Statistics · University of British Columbia · Bucks Fan
             </p>
             <p style={{ fontSize: 13, color: "#86868B", lineHeight: 1.7, marginBottom: 36, maxWidth: 360 }}>
               Hi, this is David, and welcome to my portfolio! Enjoy your stay.
@@ -234,8 +222,7 @@ export default function ScrollLayout() {
             transition={{ delay: 1.4, duration: 0.6 }}
             onClick={() => scrollTo(1)}
             style={{
-              position: "absolute",
-              bottom: isMobile ? 56 : 44,
+              flexShrink: 0,
               display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
               cursor: "pointer",
             }}
@@ -266,15 +253,17 @@ export default function ScrollLayout() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.45, ease: "easeOut" }}
               style={{
-                padding: isMobile ? "0 24px 16px" : "0 64px 20px",
-                display: "flex", alignItems: "center", gap: 12,
+                padding: isMobile ? "0 24px 28px" : "0 64px 32px",
+                display: "flex", flexDirection: "column", gap: 8,
               }}
             >
-              <span style={{ fontSize: 11, color: "#ADADB3", letterSpacing: "0.15em", fontWeight: 400 }}>
+              <span style={{ fontSize: 11, color: "#ADADB3", letterSpacing: "0.2em", fontWeight: 600 }}>
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <div style={{ width: 18, height: 1, background: "rgba(0,0,0,0.12)" }} />
-              <span style={{ fontSize: 15, fontWeight: 700, color: "#1D1D1F", letterSpacing: "-0.01em" }}>
+              <span style={{
+                fontSize: isMobile ? "2rem" : "clamp(2.2rem, 4vw, 3.2rem)",
+                fontWeight: 800, color: "#1D1D1F", letterSpacing: "-0.03em", lineHeight: 1.05,
+              }}>
                 {s.label}
               </span>
             </motion.div>

@@ -237,7 +237,7 @@ export default function PortfolioLayout() {
 
                 {/* Subtitle */}
                 <p style={{ fontSize: isMobile ? 13 : 14, color: "#6E6E73", letterSpacing: "0.03em", marginBottom: 8 }}>
-                  Statistics · University of British Columbia
+                  Computer Science and Statistics · University of British Columbia
                 </p>
                 <p style={{ fontSize: 12, color: "#86868B", lineHeight: 1.65, marginBottom: 28, maxWidth: 300 }}>
                   Hi, this is David, and welcome to my portfolio! Enjoy your stay.

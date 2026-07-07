@@ -9,10 +9,22 @@ interface ProjectItem {
   tags: string[];
   url: string;
   video?: string;
+  videoOrientation?: "portrait";
   event?: string;
 }
 
 const VIDEO_PROJECTS: ProjectItem[] = [
+  {
+    name: "Starbucks Offer Completion Predictor",
+    description:
+      "Predicts whether a Starbucks customer will complete a promotional offer. Engineered a labeled training set from 300,000+ raw transaction and event log records across 3 data sources, producing 66,501 (customer, offer) pairs. Benchmarked 4 models — Random Forest achieved 82% test accuracy on 12 engineered features. Exported to ONNX and shipped a fully static prediction app on Vercel using onnxruntime-web for live in-browser inference with no backend required.",
+    tags: ["Python", "pandas", "scikit-learn", "PyTorch", "ONNX", "onnxruntime-web", "HTML/JS", "Vercel"],
+    url: "https://github.com/davidhchng/starbucks-offer-intelligence",
+    video: "/starbucks-offer-intel-video.mov",
+  },
+];
+
+const LLM_PROJECTS: ProjectItem[] = [
   {
     name: "ShoulderCoach: Basketball Decision Assistant",
     description:
@@ -29,14 +41,6 @@ const VIDEO_PROJECTS: ProjectItem[] = [
     url: "https://github.com/davidhchng/MiniMemo",
     video: "/MiniMemoExample.mov",
   },
-  {
-    name: "Starbucks Offer Completion Predictor",
-    description:
-      "Predicts whether a Starbucks customer will complete a promotional offer. Engineered a labeled training set from 300,000+ raw transaction and event log records across 3 data sources, producing 66,501 (customer, offer) pairs. Benchmarked 4 models — Random Forest achieved 82% test accuracy on 12 engineered features. Exported to ONNX and shipped a fully static prediction app on Vercel using onnxruntime-web for live in-browser inference with no backend required.",
-    tags: ["Python", "pandas", "scikit-learn", "PyTorch", "ONNX", "onnxruntime-web", "HTML/JS", "Vercel"],
-    url: "https://github.com/davidhchng/starbucks-offer-intelligence",
-    video: "/starbucks-offer-intel-video.mov",
-  },
 ];
 
 const DATA_PROJECTS: ProjectItem[] = [
@@ -46,6 +50,7 @@ const DATA_PROJECTS: ProjectItem[] = [
       "Processed 130,000+ City of Vancouver business registration records. Designed statistical metrics quantifying market concentration, closure risk, and business entry recency across neighbourhoods and business types.",
     tags: ["Python", "Pandas"],
     url: "https://github.com/davidhchng/Vancouver-Business-Registration-Analysis",
+    video: "/vanbizreg-video.mov",
   },
   {
     name: "Palo Alto EV Charging Station Utilization Analysis",
@@ -53,6 +58,7 @@ const DATA_PROJECTS: ProjectItem[] = [
       "Analyzed 259,000+ EV charging session records. Engineered metrics identifying usage concentration and behavioral differences. Generated recommendations for capacity expansion and demand-shifting strategies.",
     tags: ["SQL", "Tableau", "Python", "Pandas"],
     url: "https://github.com/davidhchng/ev-charging-station-analysis",
+    video: "/palo-alto-video.mov",
   },
   {
     name: "PLAICRAFT AI Learning & Demographic Analysis",
@@ -71,6 +77,8 @@ const HACKATHONS: ProjectItem[] = [
       "Nearly 6M Canadians lack a family doctor. BridgeCare lets patients chat with AI, generating summaries for real doctors to review and respond — no waiting room, no travel, just faster care.",
     tags: ["React", "TypeScript", "Express.js", "OpenAI", "SQLite", "Tailwind"],
     url: "https://devpost.com/software/bridgecare-we91ha",
+    video: "/bridgecare-video.mov",
+    videoOrientation: "portrait",
   },
   {
     name: "AlignU",
@@ -79,6 +87,7 @@ const HACKATHONS: ProjectItem[] = [
       "Feeling overwhelmed with the endless amount of UBC clubs? AlignU lets you swipe through clubs to find your fit. Build your profile, get personalized matches, and discover events happening on campus.",
     tags: ["React", "TypeScript", "OpenAI", "Vite", "Tailwind"],
     url: "https://devpost.com/software/alignu",
+    video: "/alignu-video.mov",
   },
   {
     name: "Feedle",
@@ -87,6 +96,7 @@ const HACKATHONS: ProjectItem[] = [
       "Feedle curates your social feed by aesthetic: filter, preview, and caption your photos to match the vibe of your vision.",
     tags: ["HTML", "CSS", "JavaScript"],
     url: "https://devpost.com/software/feedle",
+    video: "/feedle-video.mov",
   },
 ];
 
@@ -111,7 +121,12 @@ function ProjectCard({ project, index, onClick }: { project: ProjectItem; index:
       whileHover={{ y: -3, transition: { type: "spring", stiffness: 380, damping: 28 } }}
     >
       {project.video && (
-        <div style={{ aspectRatio: "16/9", overflow: "hidden", background: "#000", marginBottom: 13, borderRadius: 3 }}>
+        <div style={{
+          aspectRatio: project.videoOrientation === "portrait" ? "9/16" : "16/9",
+          maxHeight: project.videoOrientation === "portrait" ? 420 : undefined,
+          margin: project.videoOrientation === "portrait" ? "0 auto 13px" : "0 0 13px",
+          overflow: "hidden", background: "#000", borderRadius: 3,
+        }}>
           <video
             src={project.video}
             autoPlay muted loop playsInline
@@ -168,7 +183,7 @@ function Modal({ project, onClose }: { project: ProjectItem; onClose: () => void
         transition={{ duration: 0.26, ease: [0.25, 0.46, 0.45, 0.94] }}
         onClick={e => e.stopPropagation()}
         style={{
-          background: "#F5F5F7",
+          background: "#FAF9F6",
           border: "1px solid rgba(0,0,0,0.09)",
           borderRadius: 14,
           maxWidth: 540,
@@ -193,7 +208,12 @@ function Modal({ project, onClose }: { project: ProjectItem; onClose: () => void
         </div>
 
         {project.video && (
-          <div style={{ aspectRatio: "16/9", overflow: "hidden", borderRadius: 9, marginBottom: 24, background: "#000" }}>
+          <div style={{
+            aspectRatio: project.videoOrientation === "portrait" ? "9/16" : "16/9",
+            maxHeight: project.videoOrientation === "portrait" ? 480 : undefined,
+            margin: project.videoOrientation === "portrait" ? "0 auto 24px" : "0 0 24px",
+            overflow: "hidden", borderRadius: 9, background: "#000",
+          }}>
             <video
               src={project.video}
               autoPlay muted loop playsInline
@@ -249,7 +269,7 @@ function SectionLabel({ children }: { children: string }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "#6E6E73", marginBottom: 14 }}
+      style={{ fontSize: "clamp(1.4rem, 2.6vw, 1.9rem)", fontWeight: 800, letterSpacing: "-0.02em", color: "#1D1D1F", marginBottom: 20 }}
     >
       {children}
     </motion.p>
@@ -269,7 +289,6 @@ export default function ProjectsPanel() {
         </div>
 
         <div>
-          <SectionLabel>Analysis & Research</SectionLabel>
           <div className="projects-grid-small">
             {DATA_PROJECTS.map((p, i) => (
               <ProjectCard key={p.name} project={p} index={i} onClick={() => setSelected(p)} />
@@ -281,6 +300,15 @@ export default function ProjectsPanel() {
           <SectionLabel>Hackathons & Datathons</SectionLabel>
           <div className="projects-grid-small">
             {HACKATHONS.map((p, i) => (
+              <ProjectCard key={p.name} project={p} index={i} onClick={() => setSelected(p)} />
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <SectionLabel>LLM-Powered Projects</SectionLabel>
+          <div className="projects-grid-video">
+            {LLM_PROJECTS.map((p, i) => (
               <ProjectCard key={p.name} project={p} index={i} onClick={() => setSelected(p)} />
             ))}
           </div>

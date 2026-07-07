@@ -67,7 +67,7 @@ function HeroPreview() {
           David Chang
         </h1>
         <p style={{ fontSize: 13, color: "#6E6E73", lineHeight: 1.65, maxWidth: 280 }}>
-          Statistics undergraduate at UBC building data pipelines, analytical tools, and full-stack products.
+          Computer Science and Statistics undergraduate at UBC building data pipelines, analytical tools, and full-stack products.
         </p>
       </div>
       <div style={{ display: "flex", gap: 14, flexWrap: "wrap" as const }}>
@@ -96,7 +96,7 @@ function AboutPreview() {
     <>
       <SectionLabel>About</SectionLabel>
       <p style={{ fontSize: 12, color: "#6E6E73", lineHeight: 1.65 }}>
-        Stats undergrad at UBC interested in data science, reproducible analytical workflows, and AI-assisted tooling.
+        CS & Stats undergrad at UBC interested in data science, reproducible analytical workflows, and AI-assisted tooling.
       </p>
     </>
   );

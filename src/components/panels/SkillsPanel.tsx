@@ -3,15 +3,11 @@
 const SKILL_GROUPS = [
   {
     category: "Programming",
-    items: ["Python", "R", "SQL", "Java"],
+    items: ["Python", "R", "SQL", "Java", "C++"],
   },
   {
     category: "Data Tools",
-    items: ["Pandas", "Tidyverse", "Tableau", "Excel"],
-  },
-  {
-    category: "Web & APIs",
-    items: ["Next.js", "TypeScript", "FastAPI"],
+    items: ["Pandas", "Tidyverse", "Tableau", "Excel", "Databricks", "Scikit-learn", "Apache Spark"],
   },
   {
     category: "Other Tools",
@@ -20,11 +16,13 @@ const SKILL_GROUPS = [
 ];
 
 const COURSEWORK = [
-  { name: "Statistical Inference for Data Science", grade: "95%" },
-  { name: "Software Construction",                  grade: "93%" },
-  { name: "Integral Calculus",                      grade: "94%" },
-  { name: "Intro to Data Science",                  grade: "89%" },
-  { name: "Systematic Program Design",              grade: "90%" },
+  "Statistical Inference for Data Science",
+  "Software Construction",
+  "Data Structures and Algorithms",
+  "Multivariable Calculus",
+  "Linear Algebra",
+  "Intro to Data Science",
+  "Systematic Program Design",
 ];
 
 export default function SkillsPanel() {
@@ -53,10 +51,7 @@ export default function SkillsPanel() {
         </p>
         <ul className="space-y-2">
           {COURSEWORK.map((c) => (
-            <li key={c.name} className="flex justify-between items-baseline">
-              <span className="text-xs" style={{ color: "#6E6E73" }}>{c.name}</span>
-              <span className="text-xs font-medium tabular-nums ml-4" style={{ color: "#86868B" }}>{c.grade}</span>
-            </li>
+            <li key={c} className="text-xs" style={{ color: "#6E6E73" }}>{c}</li>
           ))}
         </ul>
       </div>

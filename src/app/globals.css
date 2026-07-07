@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #F5F5F7;
+  --background: #FAF9F6;
   --foreground: #1D1D1F;
 }
 
@@ -14,9 +14,10 @@
 html,
 body {
   max-width: 100vw;
-  background: #F5F5F7;
+  background: #FAF9F6;
   color: #1D1D1F;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif;
+  font-weight: 500;
 }
 
 ::-webkit-scrollbar {
@@ -55,21 +56,11 @@ body {
   gap: 10px;
   grid-template-columns: 1fr;
 }
-@media (min-width: 520px) {
-  .projects-grid-video {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
 
 .projects-grid-small {
   display: grid;
   gap: 10px;
-  grid-template-columns: repeat(2, 1fr);
-}
-@media (min-width: 600px) {
-  .projects-grid-small {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  grid-template-columns: 1fr;
 }
 
 /* ── Legacy bento grid ────────────────────────────────────────────────────── */

@@ -5,11 +5,11 @@ export default function AboutPanel() {
     <div className="space-y-6">
       <div>
         <h2 className="text-xl font-semibold mb-1" style={{ color: "#1D1D1F" }}>David Chang</h2>
-        <p className="text-xs tracking-wide" style={{ color: "#86868B" }}>Statistics · University of British Columbia · Langley, BC</p>
+        <p className="text-xs tracking-wide" style={{ color: "#86868B" }}>Computer Science and Statistics · University of British Columbia · Langley, BC</p>
       </div>
 
       <p className="text-sm leading-relaxed" style={{ color: "#6E6E73" }}>
-        Statistics undergraduate at UBC interested in data science education and reproducible
+        Computer Science and Statistics undergraduate at UBC interested in data science education and reproducible
         analytical workflows. I build end-to-end data pipelines, lead workshops, and help
         newcomers learn practical tools like version control, data analysis, and collaborative
         research practices.
@@ -19,7 +19,7 @@ export default function AboutPanel() {
         <p className="text-[10px] tracking-widest uppercase" style={{ color: "#86868B" }}>Education</p>
         <div className="flex justify-between items-baseline">
           <div>
-            <p className="text-sm font-medium" style={{ color: "#1D1D1F" }}>B.Sc. Statistics</p>
+            <p className="text-sm font-medium" style={{ color: "#1D1D1F" }}>B.Sc. Computer Science and Statistics</p>
             <p className="text-xs mt-0.5" style={{ color: "#86868B" }}>University of British Columbia</p>
           </div>
           <span className="text-xs flex-shrink-0 ml-4" style={{ color: "#86868B" }}>Expected May 2028</span>

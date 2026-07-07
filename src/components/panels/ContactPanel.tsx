@@ -21,11 +21,6 @@ const LINKS = [
 export default function ContactPanel() {
   return (
     <div>
-      <p className="text-sm leading-relaxed mb-8" style={{ color: "#6E6E73" }}>
-        Open to interesting conversations, data collaborations, and opportunities.
-        Best reached by email.
-      </p>
-
       <ul className="space-y-6">
         {LINKS.map((link) => (
           <li key={link.label}>
