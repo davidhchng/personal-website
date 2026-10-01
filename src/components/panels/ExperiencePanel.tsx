@@ -7,9 +7,15 @@ interface Role {
   location: string;
 }
 
-const LEADERSHIP: Role[] = [
+const WORK: Role[] = [
   {
-    role: "Technical Director",
+    role: "Analytics Intern",
+    org: "Tryuu",
+    period: "Sep 2026 — Present",
+    location: "Vancouver, BC",
+  },
+  {
+    role: "Software Developer",
     org: "UBC Undergraduate Statistics Society",
     period: "Oct 2025 — Present",
     location: "Vancouver, BC",
@@ -22,11 +28,17 @@ const LEADERSHIP: Role[] = [
   },
 ];
 
-const WORK: Role[] = [
+const LEADERSHIP: Role[] = [
+  {
+    role: "Jumpstart Orientation Leader",
+    org: "UBC Jumpstart",
+    period: "Aug 2026 — Sep 2026",
+    location: "Vancouver, BC",
+  },
   {
     role: "Barista Trainer",
     org: "Starbucks",
-    period: "Aug 2025 — Present",
+    period: "Aug 2025 — Aug 2026",
     location: "Surrey, BC",
   },
   {
@@ -34,6 +46,12 @@ const WORK: Role[] = [
     org: "New York Fries",
     period: "Jul 2022 — Aug 2025",
     location: "Surrey, BC",
+  },
+  {
+    role: "Workshop Coordinator",
+    org: "UBC NutriKids",
+    period: "Sep 2024 — Dec 2024",
+    location: "Vancouver, BC",
   },
 ];
 
@@ -46,10 +64,10 @@ function RoleItem({ item }: { item: Role }) {
       </div>
       <div className="pb-9 flex-1 min-w-0">
         <div className="flex items-baseline justify-between gap-3 mb-1">
-          <span className="text-base font-semibold" style={{ color: "#1D1D1F" }}>{item.role}</span>
-          <span className="text-xs tracking-wider flex-shrink-0 tabular-nums" style={{ color: "#86868B" }}>{item.period}</span>
+          <span className="text-lg font-semibold" style={{ color: "#1D1D1F" }}>{item.role}</span>
+          <span className="text-sm tracking-wider flex-shrink-0 tabular-nums" style={{ color: "#86868B" }}>{item.period}</span>
         </div>
-        <p className="text-sm" style={{ color: "#86868B" }}>{item.org} · {item.location}</p>
+        <p className="text-base" style={{ color: "#86868B" }}>{item.org} · {item.location}</p>
       </div>
     </li>
   );
@@ -59,7 +77,7 @@ export default function ExperiencePanel() {
   return (
     <div className="space-y-10">
       <ul className="space-y-2">
-        {LEADERSHIP.map((item) => <RoleItem key={item.org} item={item} />)}
+        {WORK.map((item) => <RoleItem key={item.org} item={item} />)}
       </ul>
 
       <div className="pt-8" style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }}>
@@ -67,7 +85,7 @@ export default function ExperiencePanel() {
           Leadership
         </p>
         <ul className="space-y-2">
-          {WORK.map((item) => <RoleItem key={item.org} item={item} />)}
+          {LEADERSHIP.map((item) => <RoleItem key={item.org} item={item} />)}
         </ul>
       </div>
     </div>

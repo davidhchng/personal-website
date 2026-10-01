@@ -33,7 +33,7 @@ export default function AboutPanel() {
       <div className="pt-5 space-y-2" style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }}>
         <p className="text-[10px] tracking-widest uppercase" style={{ color: "#86868B" }}>Currently</p>
         <p className="text-xs leading-relaxed" style={{ color: "#6E6E73" }}>
-          Technical Director @ UBC Undergraduate Statistics Society
+          Software Developer @ UBC Undergraduate Statistics Society
         </p>
         <p className="text-xs leading-relaxed" style={{ color: "#6E6E73" }}>
           Web Development & Event Lead @ UBC STEM Fellowship

@@ -12,8 +12,8 @@ const NAV_H = 52;
 
 const SECTIONS = [
   { id: "intro",      label: null         },
-  { id: "projects",   label: "Projects"   },
   { id: "experience", label: "Experience" },
+  { id: "projects",   label: "Projects"   },
   { id: "skills",     label: "Skills"     },
   { id: "contact",    label: "Contact"    },
 ];
