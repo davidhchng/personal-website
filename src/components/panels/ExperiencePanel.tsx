@@ -47,12 +47,6 @@ const LEADERSHIP: Role[] = [
     period: "Jul 2022 — Aug 2025",
     location: "Surrey, BC",
   },
-  {
-    role: "Workshop Coordinator",
-    org: "UBC NutriKids",
-    period: "Sep 2024 — Dec 2024",
-    location: "Vancouver, BC",
-  },
 ];
 
 function RoleItem({ item }: { item: Role }) {
