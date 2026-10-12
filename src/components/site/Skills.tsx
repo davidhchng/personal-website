@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
-import { COURSEWORK, HACKATHONS, SKILL_GROUPS } from "@/lib/content";
+import { CERTIFICATIONS, COURSEWORK, HACKATHONS, SKILL_GROUPS } from "@/lib/content";
 
 export default function Skills() {
   return (
@@ -28,6 +28,27 @@ export default function Skills() {
             </div>
           </motion.div>
         ))}
+
+        <div style={{ marginTop: 72, paddingTop: 40, borderTop: "1px solid var(--line)" }}>
+          <p className="h-sub" style={{ marginBottom: 24 }}>Certifications</p>
+          <ul className="cert-list">
+            {CERTIFICATIONS.map((c, i) => (
+              <motion.li
+                key={c.name}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.4, delay: i * 0.04 }}
+              >
+                <a href={c.url} target="_blank" rel="noopener noreferrer" className="cert-link">
+                  <span className="cert-name">{c.name}</span>
+                  <span className="cert-meta">{c.issuer} · {c.date}</span>
+                  <span className="cert-arrow" aria-hidden>↗</span>
+                </a>
+              </motion.li>
+            ))}
+          </ul>
+        </div>
 
         <div style={{ marginTop: 72, paddingTop: 40, borderTop: "1px solid var(--line)" }}>
           <p className="h-sub" style={{ marginBottom: 24 }}>Relevant Coursework</p>
@@ -56,6 +77,16 @@ export default function Skills() {
           transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .2s cubic-bezier(.2,.7,.2,1);
         }
         .skill-chip:hover { transform: translateY(-2px); background: var(--fg); color: var(--bg); border-color: var(--fg); }
+        .cert-list { list-style: none; }
+        .cert-link {
+          display: flex; align-items: baseline; gap: 14px; padding: 14px 0;
+          border-bottom: 1px solid var(--line); text-decoration: none;
+        }
+        .cert-name { font-size: 15px; font-weight: 600; transition: transform .25s cubic-bezier(.2,.7,.2,1); }
+        .cert-meta { font-size: 13px; color: var(--muted); margin-right: auto; }
+        .cert-arrow { font-size: 13px; color: var(--faint); transition: color .2s ease; }
+        .cert-link:hover .cert-name { transform: translateX(6px); }
+        .cert-link:hover .cert-arrow { color: var(--accent); }
         .course-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; }
         .course-list li { display: flex; align-items: baseline; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line); }
         .course-name { font-size: 15px; color: var(--muted); transition: color .2s ease, transform .25s cubic-bezier(.2,.7,.2,1); display: inline-block; }

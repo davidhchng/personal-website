@@ -186,6 +186,15 @@ export const COURSEWORK = [
   "Integral Calculus",
 ];
 
+export const CERTIFICATIONS = [
+  {
+    name: "Data Science Essentials with Python",
+    issuer: "Cisco",
+    date: "Oct 2026",
+    url: "https://www.credly.com/badges/ee3dd8e6-2bf2-46bb-be43-c7e77ed8a10d/public_url",
+  },
+];
+
 export const LINKS = {
   email:    { label: "Email",    href: "mailto:davidhchang75@gmail.com",                 value: "davidhchang75@gmail.com" },
   github:   { label: "GitHub",   href: "https://github.com/davidhchng",                  value: "github.com/davidhchng" },
