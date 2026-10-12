@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { motion, useMotionTemplate, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
 import DotField from "./DotField";
 import Hoops from "./Hoops";
@@ -43,9 +44,9 @@ function TiltPhoto() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.92, y: 24, filter: "blur(10px)" }}
+      initial={{ opacity: 0, scale: 0.94, y: 24, filter: "blur(10px)" }}
       animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
-      transition={{ duration: 1, ease: EASE }}
+      transition={{ duration: 1, ease: EASE, delay: 0.2 }}
       style={{ perspective: 900 }}
     >
       <motion.div
@@ -56,17 +57,18 @@ function TiltPhoto() {
         className="hero-photo"
         style={{
           rotateX, rotateY, transformStyle: "preserve-3d",
-          position: "relative", borderRadius: 20, overflow: "hidden",
+          position: "relative", borderRadius: 4, overflow: "hidden",
           border: "1px solid var(--line)", boxShadow: "var(--shadow-lg)",
           background: "var(--bg-sunk)",
         }}
       >
-        <img
+        <Image
           src="/v/coverphoto.jpg"
           alt="David (Hanmin) Chang"
           width={900}
           height={1194}
-          fetchPriority="high"
+          priority
+          sizes="(max-width: 860px) 70vw, 360px"
           style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
         />
         <motion.div aria-hidden style={{ position: "absolute", inset: 0, background: glare, mixBlendMode: "soft-light", pointerEvents: "none" }} />
@@ -75,20 +77,20 @@ function TiltPhoto() {
   );
 }
 
-function RevealWords({ text, delay = 0, className, style }: { text: string; delay?: number; className?: string; style?: React.CSSProperties }) {
+// Masthead name — one word per line, each rising out of its own clipped band.
+function RevealLines({ text, delay = 0 }: { text: string; delay?: number }) {
   return (
-    <h1 className={className} style={style} aria-label={text}>
+    <h1 className="hero-name" aria-label={text}>
       {text.split(" ").map((word, i) => (
-        <span key={i} aria-hidden style={{ display: "inline-block", overflow: "hidden", verticalAlign: "top", paddingBottom: "0.08em", marginBottom: "-0.08em" }}>
+        <span key={i} aria-hidden className="hero-name-line">
           <motion.span
-            initial={{ y: "110%", rotate: 4 }}
+            initial={{ y: "110%", rotate: 3 }}
             animate={{ y: "0%", rotate: 0 }}
-            transition={{ duration: 0.9, ease: EASE, delay: delay + i * 0.08 }}
+            transition={{ duration: 0.9, ease: EASE, delay: delay + i * 0.09 }}
             style={{ display: "inline-block", transformOrigin: "0% 100%" }}
           >
             {word}
           </motion.span>
-          {i < text.split(" ").length - 1 && " "}
         </span>
       ))}
     </h1>
@@ -114,60 +116,53 @@ export default function Hero() {
       <Hoops />
 
       <motion.div
-        style={{ y: contentY, opacity: contentOpacity, flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "84px 20px 24px", position: "relative", zIndex: 1 }}
+        className="wrap hero-grid"
+        style={{ y: contentY, opacity: contentOpacity, flex: 1, position: "relative", zIndex: 1 }}
       >
-        <TiltPhoto />
-
-        <RevealWords
-          text="David (Hanmin) Chang"
-          delay={0.25}
-          style={{
-            marginTop: 32,
-            fontSize: "clamp(2.4rem, 5vw, 3.8rem)", fontWeight: 700,
-            letterSpacing: "-0.04em", lineHeight: 1.04, marginBottom: 16,
-          }}
-        />
-
-        <motion.p {...fade(0.7)} style={{ fontSize: "clamp(14px, 1.5vw, 17px)", color: "var(--muted)", letterSpacing: "0.01em", marginBottom: 12, lineHeight: 1.6 }}>
-          Computer Science and Statistics · University of British Columbia ·{" "}
-          <button
-            id="bucks-btn"
-            onClick={actions.spawnBall}
-            data-cursor="Play"
-            title="Click me"
-            style={{
-              background: "none", border: "none", padding: 0, cursor: "pointer", font: "inherit",
-              color: "var(--accent)", fontWeight: 600,
-              borderBottom: "1.5px dashed currentColor",
-            }}
-          >
-            Bucks Fan 🏀
-          </button>
-        </motion.p>
-
-        <motion.p {...fade(0.8)} style={{ fontSize: "clamp(15px, 1.4vw, 17px)", color: "var(--subtle)", lineHeight: 1.7, marginBottom: 34, maxWidth: 420 }}>
-          Hi, this is <span className="serif" style={{ fontSize: "1.3em", color: "var(--fg)" }}>David</span>, and welcome to my portfolio! Enjoy your stay.
-        </motion.p>
-
-        <motion.div {...fade(0.9)} style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
-          {[LINKS.github, LINKS.linkedin].map(l => (
-            <Magnetic key={l.label}>
-              <a href={l.href} target="_blank" rel="noopener noreferrer" className="chip" style={{ textDecoration: "none", padding: "9px 18px" }}>
-                {l.label} <span aria-hidden>↗</span>
-              </a>
-            </Magnetic>
-          ))}
-          <Magnetic>
+        <div className="hero-copy">
+          <motion.p {...fade(0.15)} className="eyebrow hero-standfirst">
+            Computer Science and Statistics · University of British Columbia ·{" "}
             <button
-              onClick={() => actions.copyEmail(LINKS.email.value)}
-              className="chip"
-              data-cursor="Copy"
-              style={{ padding: "9px 18px", background: "var(--fg)", color: "var(--bg)", borderColor: "var(--fg)" }}
+              id="bucks-btn"
+              onClick={actions.spawnBall}
+              data-cursor="Play"
+              title="Click me"
+              className="hero-bucks"
             >
-              Email <span aria-hidden>⧉</span>
+              Bucks Fan 🏀
             </button>
-          </Magnetic>
-        </motion.div>
+          </motion.p>
+
+          <RevealLines text="David (Hanmin) Chang" delay={0.25} />
+
+          <motion.p {...fade(0.8)} className="hero-blurb">
+            Hi, this is <span className="serif" style={{ fontSize: "1.25em", color: "var(--fg)" }}>David</span>, and welcome to my portfolio! Enjoy your stay.
+          </motion.p>
+
+          <motion.div {...fade(0.9)} className="hero-actions">
+            {[LINKS.github, LINKS.linkedin].map(l => (
+              <Magnetic key={l.label}>
+                <a href={l.href} target="_blank" rel="noopener noreferrer" className="chip" style={{ textDecoration: "none", padding: "9px 18px" }}>
+                  {l.label} <span aria-hidden>↗</span>
+                </a>
+              </Magnetic>
+            ))}
+            <Magnetic>
+              <button
+                onClick={() => actions.copyEmail(LINKS.email.value)}
+                className="chip"
+                data-cursor="Copy"
+                style={{ padding: "9px 18px", background: "var(--fg)", color: "var(--bg)", borderColor: "var(--fg)" }}
+              >
+                Email <span aria-hidden>⧉</span>
+              </button>
+            </Magnetic>
+          </motion.div>
+        </div>
+
+        <div className="hero-portrait">
+          <TiltPhoto />
+        </div>
       </motion.div>
 
       {/* Bottom rail */}
@@ -205,8 +200,73 @@ export default function Hero() {
       </motion.div>
 
       <style>{`
-        .hero-photo { width: clamp(180px, 28svh, 300px); aspect-ratio: 4 / 5; }
-        @media (max-width: 640px) { .hero-rail-k { display: none !important; } }
+        .hero-grid {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) auto;
+          align-items: center;
+          gap: 56px;
+          padding-top: 96px;
+          padding-bottom: 24px;
+        }
+        .hero-copy { min-width: 0; }
+
+        /* Standfirst sits above the name, newspaper-style, on a hairline */
+        .hero-standfirst {
+          display: block;
+          font-size: 11px;
+          line-height: 1.7;
+          padding-bottom: 14px;
+          margin-bottom: 22px;
+          border-bottom: 1px solid var(--line);
+          text-transform: none;
+          letter-spacing: 0.14em;
+        }
+        .hero-bucks {
+          background: none; border: none; padding: 0; cursor: pointer; font: inherit;
+          letter-spacing: inherit;
+          color: var(--accent); font-weight: 700;
+          border-bottom: 1.5px dashed currentColor;
+        }
+
+        .hero-name {
+          font-size: clamp(3.2rem, 9.5vw, 7.5rem);
+          font-weight: 700;
+          letter-spacing: -0.05em;
+          line-height: 0.88;
+        }
+        .hero-name-line {
+          display: block;
+          overflow: hidden;
+          padding-bottom: 0.06em;
+          margin-bottom: -0.06em;
+        }
+        /* The parenthetical reads as a subhead, not a shout */
+        .hero-name-line:nth-child(2) { padding-left: 0.08em; color: var(--muted); }
+
+        .hero-blurb {
+          font-size: clamp(15px, 1.4vw, 17px);
+          color: var(--subtle);
+          line-height: 1.7;
+          max-width: 34ch;
+          margin: 28px 0 30px;
+        }
+        .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+        .hero-photo { width: clamp(240px, 26vw, 360px); aspect-ratio: 4 / 5; }
+
+        @media (max-width: 860px) {
+          .hero-grid {
+            grid-template-columns: 1fr;
+            gap: 34px;
+            align-items: start;
+            padding-top: 88px;
+            text-align: left;
+          }
+          .hero-portrait { order: -1; }
+          .hero-photo { width: clamp(170px, 42vw, 230px); }
+          .hero-blurb { margin: 22px 0 24px; }
+          .hero-rail-k { display: none !important; }
+        }
       `}</style>
     </section>
   );

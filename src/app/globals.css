@@ -61,7 +61,7 @@ body {
   overflow-x: clip;
   background: var(--bg);
   color: var(--fg);
-  /* Trying Times New Roman — previous: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", var(--font-inter), sans-serif */
+  /* Trying Times New Roman — previous: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif */
   font-family: "Times New Roman", Times, serif;
   font-weight: 500;
   transition: background-color 0.4s ease, color 0.4s ease;
@@ -84,6 +84,25 @@ button { font: inherit; color: inherit; }
   outline-offset: 3px;
   border-radius: 4px;
 }
+
+/* Keyboard users get a way past the nav; invisible until focused */
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  z-index: 200;
+  transform: translate(-50%, -150%);
+  padding: 10px 18px;
+  font-size: 13px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-elev);
+  color: var(--fg);
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease;
+}
+.skip-link:focus-visible { transform: translate(-50%, 0); }
 
 .serif {
   font-family: var(--font-serif), "Times New Roman", serif;
@@ -130,6 +149,56 @@ html.has-cursor textarea {
 .section-pad { padding: 140px 0 40px; }
 @media (max-width: 640px) {
   .section-pad { padding: 96px 0 24px; }
+}
+
+/* ── Editorial section grid ───────────────────────────────────────────────── */
+/* Label rail on the left, content on the right. The rail sticks so the
+   section you're reading is always named, which replaces the big headings. */
+
+.section-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 190px) minmax(0, 1fr);
+  gap: 0 56px;
+  align-items: start;
+}
+
+.section-rail {
+  position: sticky;
+  top: 92px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 6px;
+  border-top: 2px solid var(--fg);
+}
+
+.rail-index {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.rail-title {
+  font-size: clamp(1.5rem, 2.1vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+@media (max-width: 900px) {
+  /* minmax(0,…) not 1fr — a wide child (the scrolling filter row) would
+     otherwise blow the column out past the viewport */
+  .section-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .section-rail {
+    position: static;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 32px;
+    padding-top: 10px;
+  }
 }
 
 .eyebrow {
@@ -203,15 +272,13 @@ html.has-cursor textarea {
   overflow: hidden;
 }
 
+/* Two up, with featured work breaking the full width of the content column */
 .projects-grid {
   display: grid;
   gap: 16px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .projects-grid .span-2 { grid-column: span 2; }
-@media (max-width: 1000px) {
-  .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
 @media (max-width: 640px) {
   .projects-grid { grid-template-columns: 1fr; }
   .projects-grid .span-2 { grid-column: span 1; }
@@ -284,5 +351,10 @@ html.has-cursor textarea {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .marquee-track, .live-dot::after { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .marquee-track, .live-dot::after { animation: none !important; }
 }

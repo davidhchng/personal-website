@@ -69,9 +69,9 @@ function Timeline({ title, roles, first = false }: { title: string; roles: Role[
 export default function Experience() {
   return (
     <section id="experience" className="section-pad" style={{ scrollMarginTop: 20 }}>
-      <div className="wrap">
+      <div className="wrap section-grid">
         <SectionHeader index="01" title="Experience" />
-        <div style={{ maxWidth: 860 }}>
+        <div>
           <Timeline title="Work" roles={WORK} first />
           <Timeline title="Leadership" roles={LEADERSHIP} />
           <Timeline title="Volunteering" roles={VOLUNTEERING} />

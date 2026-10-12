@@ -55,6 +55,7 @@ export default function Nav() {
       <div className="wrap" style={{ height: 56, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
         <button
           onClick={() => actions.scrollTo("top")}
+          aria-label="Back to top"
           style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center", gap: 10 }}
         >
           <span style={{
@@ -83,6 +84,7 @@ export default function Nav() {
                 <button
                   key={s.id}
                   onClick={() => actions.scrollTo(s.id)}
+                  aria-current={isActive ? "true" : undefined}
                   style={{
                     position: "relative", background: "none", border: "none", cursor: "pointer",
                     padding: "7px 13px", fontSize: 12, letterSpacing: "0.03em",

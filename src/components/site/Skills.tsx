@@ -7,9 +7,10 @@ import { COURSEWORK, SKILL_GROUPS } from "@/lib/content";
 export default function Skills() {
   return (
     <section id="skills" className="section-pad" style={{ scrollMarginTop: 20 }}>
-      <div className="wrap">
+      <div className="wrap section-grid">
         <SectionHeader index="03" title="Skills" />
 
+        <div>
         {SKILL_GROUPS.map((g, gi) => (
           <motion.div
             key={g.category}
@@ -44,6 +45,7 @@ export default function Skills() {
               </motion.li>
             ))}
           </ol>
+        </div>
         </div>
       </div>
 

@@ -20,7 +20,7 @@ const ICONS: Record<string, React.ReactNode> = {
 export default function Contact() {
   return (
     <section id="contact" className="section-pad" style={{ scrollMarginTop: 20, paddingBottom: 0 }}>
-      <div className="wrap">
+      <div className="wrap section-grid">
         <SectionHeader index="04" title="Contact" />
 
         <div className="contact-grid">
@@ -72,7 +72,9 @@ export default function Contact() {
             </motion.a>
           ))}
         </div>
+      </div>
 
+      <div className="wrap">
         <footer style={{ marginTop: 120, padding: "28px 0 36px", borderTop: "1px solid var(--line)", display: "flex", justifyContent: "space-between", gap: 16, flexWrap: "wrap", fontSize: 12, color: "var(--subtle)" }}>
           <span>{LOCATION_LINE}</span>
           <span>© {new Date().getFullYear()} David (Hanmin) Chang</span>
@@ -83,8 +85,12 @@ export default function Contact() {
       </div>
 
       <style>{`
-        .contact-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 16px; }
-        @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .contact-email { grid-column: span 2; }
+        @media (max-width: 900px) {
+          .contact-grid { grid-template-columns: 1fr; }
+          .contact-email { grid-column: span 1; }
+        }
         .contact-email { padding: 28px; border: 1px solid var(--line); border-radius: 18px; background: var(--bg-elev); }
         .contact-card {
           position: relative; display: flex; flex-direction: column; gap: 12px; justify-content: flex-start;

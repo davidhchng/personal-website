@@ -1,25 +1,42 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Instrument_Serif } from "next/font/google";
+import { Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import Cursor from "@/components/site/Cursor";
 import CommandPalette from "@/components/site/CommandPalette";
 import Toast from "@/components/site/Toast";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
 
 const serif = Instrument_Serif({
   subsets: ["latin"],
   weight: "400",
   style: ["italic"],
   variable: "--font-serif",
+  display: "swap",
 });
 
+const TITLE = "David Chang";
+const DESCRIPTION =
+  "David (Hanmin) Chang — Computer Science and Statistics at UBC. Projects, experience and contact.";
+
 export const metadata: Metadata = {
-  title: "David Chang",
-  description: "David (Hanmin) Chang — Computer Science and Statistics at UBC. Projects, experience and contact.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  title: TITLE,
+  description: DESCRIPTION,
+  applicationName: TITLE,
+  authors: [{ name: "David (Hanmin) Chang" }],
+  openGraph: {
+    type: "website",
+    siteName: TITLE,
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [{ url: "/v/coverphoto.jpg", width: 900, height: 1194, alt: "David (Hanmin) Chang" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ["/v/coverphoto.jpg"],
+  },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
@@ -42,7 +59,8 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className={`${inter.variable} ${serif.variable} antialiased`}>
+      <body className={`${serif.variable} antialiased`}>
+        <a href="#top" className="skip-link">Skip to content</a>
         {children}
         <div className="grain" aria-hidden />
         <CommandPalette />

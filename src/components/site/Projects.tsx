@@ -97,10 +97,11 @@ export default function Projects() {
 
   return (
     <section id="projects" className="section-pad" style={{ scrollMarginTop: 20 }}>
-      <div className="wrap">
+      <div className="wrap section-grid">
         <SectionHeader index="02" title="Projects" />
 
         <LayoutGroup>
+          <div>
           <div role="tablist" aria-label="Filter projects" className="filter-row">
             {CATEGORIES.map(c => {
               const active = filter === c.id;
@@ -148,6 +149,7 @@ export default function Projects() {
               ))}
             </AnimatePresence>
           </motion.div>
+          </div>
         </LayoutGroup>
       </div>
 
