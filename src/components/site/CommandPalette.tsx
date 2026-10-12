@@ -26,10 +26,10 @@ function buildItems(): Item[] {
     })),
     { id: "copy", group: "Actions", label: "Copy email address", hint: LINKS.email.value, icon: "⧉", run: () => actions.copyEmail(LINKS.email.value) },
     { id: "theme", group: "Actions", label: "Toggle dark mode", icon: "◐", run: () => actions.toggleTheme() },
-    { id: "ball", group: "Actions", label: "Shoot some hoops", hint: "Bucks in 6", icon: "🏀", run: () => { actions.scrollTo("top"); actions.spawnBall(); } },
+    { id: "ball", group: "Actions", label: "Shoot some hoops", hint: "Bucks in 6", icon: "◎", run: () => { actions.scrollTo("top"); actions.spawnBall(); } },
     { id: "gh", group: "Links", label: "GitHub", hint: LINKS.github.value, icon: "↗", run: () => window.open(LINKS.github.href, "_blank", "noopener") },
     { id: "li", group: "Links", label: "LinkedIn", hint: "david-chang", icon: "↗", run: () => window.open(LINKS.linkedin.href, "_blank", "noopener") },
-    { id: "mail", group: "Links", label: "Send an email", icon: "✉", run: () => { window.location.href = LINKS.email.href; } },
+    { id: "mail", group: "Links", label: "Send an email", icon: "@", run: () => { window.location.href = LINKS.email.href; } },
   ];
 }
 

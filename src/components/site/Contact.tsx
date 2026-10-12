@@ -47,7 +47,7 @@ export default function Contact() {
               </Magnetic>
               <Magnetic>
                 <a href={LINKS.email.href} className="chip" style={{ padding: "11px 20px", textDecoration: "none", fontSize: 13 }}>
-                  Say hello ✉
+                  Say hello
                 </a>
               </Magnetic>
             </div>

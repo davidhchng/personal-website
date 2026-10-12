@@ -129,7 +129,7 @@ export default function Hero() {
               title="Click me"
               className="hero-bucks"
             >
-              Bucks Fan 🏀
+              Bucks Fan
             </button>
           </motion.p>
 

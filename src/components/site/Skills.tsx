@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
-import { COURSEWORK, SKILL_GROUPS } from "@/lib/content";
+import { COURSEWORK, HACKATHONS, SKILL_GROUPS } from "@/lib/content";
 
 export default function Skills() {
   return (
@@ -11,7 +11,7 @@ export default function Skills() {
         <SectionHeader index="03" title="Skills" />
 
         <div>
-        {SKILL_GROUPS.map((g, gi) => (
+        {[...SKILL_GROUPS, { category: "Hackathons", items: HACKATHONS }].map((g, gi) => (
           <motion.div
             key={g.category}
             initial={{ opacity: 0, y: 16 }}

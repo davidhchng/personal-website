@@ -156,20 +156,34 @@ export const VOLUNTEERING: Role[] = [
   { role: "Tutor",                org: "Mary Jane Shannon Homework Program", period: "Oct 2023 — Dec 2023", location: "Surrey, BC", logo: "/logos/surreyschools.png" },
 ];
 
+// Superset of the resume — the resume trims to fit a page, the site doesn't
+// have to. Split into four groups rather than the resume's three because long
+// single rows wrap badly as chips.
 export const SKILL_GROUPS = [
-  { category: "Programming", items: ["Python", "R", "SQL", "Java", "C++"] },
-  { category: "Data Tools",  items: ["Pandas", "Tidyverse", "Tableau", "Excel", "Databricks", "Scikit-learn", "Apache Spark"] },
-  { category: "Other Tools", items: ["Git", "Version Control"] },
+  { category: "Languages", items: ["Python", "Java", "R", "C++", "SQL"] },
+  { category: "ML & Data", items: ["PyTorch", "Scikit-learn", "Pandas", "Tidyverse", "Apache Spark", "Databricks", "GPT-4o API"] },
+  { category: "Frameworks & Tools", items: ["FastAPI", "Git", "Cursor", "Tableau", "Power BI", "Excel", "Object-Oriented Programming"] },
+  { category: "Databases", items: ["PostgreSQL", "SQLite"] },
+];
+
+// Kept out of SKILL_GROUPS because the Interlude marquee is built from those —
+// event names scrolling among language names would read as noise.
+export const HACKATHONS = [
+  "UBC BizTech HelloHacks",
+  "nwPlus Hackcamp 2025",
+  "SUS HackTheCoast 2026",
 ];
 
 export const COURSEWORK = [
+  "Applied Machine Learning",
   "Statistical Inference for Data Science",
-  "Software Construction",
-  "Data Structures and Algorithms",
-  "Multivariable Calculus",
-  "Linear Algebra",
   "Intro to Data Science",
+  "Data Structures and Algorithms",
+  "Software Construction",
   "Systematic Program Design",
+  "Linear Algebra",
+  "Multivariable Calculus",
+  "Integral Calculus",
 ];
 
 export const LINKS = {
