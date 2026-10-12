@@ -1,6 +1,6 @@
 import Nav from "@/components/site/Nav";
 import Hero from "@/components/site/Hero";
-import Marquee from "@/components/site/Marquee";
+import Interlude from "@/components/site/Interlude";
 import Experience from "@/components/site/Experience";
 import Projects from "@/components/site/Projects";
 import Skills from "@/components/site/Skills";
@@ -16,9 +16,7 @@ export default function Home() {
       <main>
         <Hero />
         <Experience />
-        <div style={{ marginTop: 80 }}>
-          <Marquee items={MARQUEE} />
-        </div>
+        <Interlude items={MARQUEE} />
         <Projects />
         <Skills />
         <Contact />

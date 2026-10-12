@@ -210,9 +210,12 @@ export default function Hero() {
         }
         .hero-copy { min-width: 0; }
 
-        /* Standfirst sits above the name, newspaper-style, on a hairline */
+        /* Standfirst sits above the name, newspaper-style, on a hairline.
+           --muted not --subtle: this 11px line lands on the brightest, least
+           scrimmed part of the backdrop, where --subtle drops under 4.5:1. */
         .hero-standfirst {
           display: block;
+          color: var(--muted);
           font-size: 11px;
           line-height: 1.7;
           padding-bottom: 14px;
@@ -224,7 +227,7 @@ export default function Hero() {
         .hero-bucks {
           background: none; border: none; padding: 0; cursor: pointer; font: inherit;
           letter-spacing: inherit;
-          color: var(--accent); font-weight: 700;
+          color: var(--bucks); font-weight: 700;
           border-bottom: 1.5px dashed currentColor;
         }
 
@@ -234,11 +237,14 @@ export default function Hero() {
           letter-spacing: -0.05em;
           line-height: 0.88;
         }
+        /* overflow:hidden is what the reveal slides out of, so the band needs
+           enough room under the baseline for descenders (the g in Chang) —
+           the padding is cancelled by an equal negative margin. */
         .hero-name-line {
           display: block;
           overflow: hidden;
-          padding-bottom: 0.06em;
-          margin-bottom: -0.06em;
+          padding-bottom: 0.22em;
+          margin-bottom: -0.22em;
         }
         /* The parenthetical reads as a subhead, not a shout */
         .hero-name-line:nth-child(2) { padding-left: 0.08em; color: var(--muted); }

@@ -142,7 +142,7 @@ export interface Role {
 export const WORK: Role[] = [
   { role: "Analytics Intern",   org: "Tryuu",                               period: "Sep 2026 — Present", location: "Vancouver, BC", logo: "/logos/tryuu.png" },
   { role: "Software Developer", org: "UBC Undergraduate Statistics Society", period: "Oct 2025 — Present", location: "Vancouver, BC", logo: "/logos/ubc.png" },
-  { role: "Web Developer",      org: "UBC STEM Fellowship",                 period: "Oct 2025 — Present", location: "Surrey, BC", logo: "/logos/stemfellowship.png" },
+  { role: "Web Developer",      org: "UBC STEM Fellowship",                 period: "Oct 2025 — Present", location: "Vancouver, BC", logo: "/logos/stemfellowship.png" },
 ];
 
 export const LEADERSHIP: Role[] = [
@@ -178,7 +178,7 @@ export const LINKS = {
   linkedin: { label: "LinkedIn", href: "https://linkedin.com/in/david-chang-b56696316", value: "linkedin.com/in/david-chang-b56696316" },
 };
 
-export const LOCATION_LINE = "Langley, BC · (236) 975-5855";
+export const LOCATION_LINE = "Vancouver, BC · (236) 975-5855";
 
 export const SECTIONS = [
   { id: "experience", label: "Experience" },

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import Cursor from "@/components/site/Cursor";
+import RidgeHorizon from "@/components/site/RidgeHorizon";
 import CommandPalette from "@/components/site/CommandPalette";
 import Toast from "@/components/site/Toast";
 
@@ -41,8 +42,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#FAF9F6" },
-    { media: "(prefers-color-scheme: dark)",  color: "#0C0E0C" },
+    { media: "(prefers-color-scheme: light)", color: "#F3F6F8" },
+    { media: "(prefers-color-scheme: dark)",  color: "#0D141A" },
   ],
 };
 
@@ -61,6 +62,7 @@ export default function RootLayout({
       </head>
       <body className={`${serif.variable} antialiased`}>
         <a href="#top" className="skip-link">Skip to content</a>
+        <RidgeHorizon />
         {children}
         <div className="grain" aria-hidden />
         <CommandPalette />
