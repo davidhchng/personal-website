@@ -140,9 +140,9 @@ export interface Role {
 }
 
 export const WORK: Role[] = [
-  { role: "Data Analytics Intern (Incoming January 2026)", org: "BC Cancer", period: "", location: "Vancouver, BC", logo: "/logos/bccancer.png" },
+  { role: "Data Analytics Intern (Incoming January 2027)", org: "BC Cancer", period: "", location: "Vancouver, BC", logo: "/logos/bccancer.png" },
   { role: "Analytics Intern",               org: "Tryuu",            period: "Sep 2026 — Present", location: "Vancouver, BC", logo: "/logos/tryuu.png" },
-  { role: "Undergraduate Researcher",       org: "STEM Fellowship",  period: "2026 — Present",     location: "Remote",        logo: "/logos/stemfellowship.png" },
+  { role: "Undergraduate Researcher",       org: "STEM Fellowship",  period: "Sep 2026 — Present", location: "Vancouver, BC",      logo: "/logos/stemfellowship.png" },
 ];
 
 export const LEADERSHIP: Role[] = [
