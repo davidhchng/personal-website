@@ -140,12 +140,14 @@ export interface Role {
 }
 
 export const WORK: Role[] = [
-  { role: "Analytics Intern",   org: "Tryuu",                               period: "Sep 2026 — Present", location: "Vancouver, BC", logo: "/logos/tryuu.png" },
-  { role: "Software Developer", org: "UBC Undergraduate Statistics Society", period: "Oct 2025 — Present", location: "Vancouver, BC", logo: "/logos/ubc.png" },
-  { role: "Web Developer",      org: "UBC STEM Fellowship",                 period: "Oct 2025 — Present", location: "Vancouver, BC", logo: "/logos/stemfellowship.png" },
+  { role: "Data Analytics Intern (Incoming January 2026)", org: "BC Cancer", period: "", location: "Vancouver, BC", logo: "/logos/bccancer.png" },
+  { role: "Analytics Intern",               org: "Tryuu",            period: "Sep 2026 — Present", location: "Vancouver, BC", logo: "/logos/tryuu.png" },
+  { role: "Undergraduate Researcher",       org: "STEM Fellowship",  period: "2026 — Present",     location: "Remote",        logo: "/logos/stemfellowship.png" },
 ];
 
 export const LEADERSHIP: Role[] = [
+  { role: "Software Developer",           org: "UBC Undergraduate Statistics Society", period: "Oct 2025 — Present", location: "Vancouver, BC", logo: "/logos/uss.png" },
+  { role: "Web Developer",                org: "UBC STEM Fellowship",                 period: "Oct 2025 — Present", location: "Vancouver, BC", logo: "/logos/stemfellowship.png" },
   { role: "Jumpstart Orientation Leader", org: "UBC Jumpstart",  period: "Aug 2026 — Sep 2026", location: "Vancouver, BC", logo: "/logos/ubc.png" },
   { role: "Barista Trainer",              org: "Starbucks",      period: "Aug 2025 — Aug 2026", location: "Surrey, BC", logo: "/logos/starbucks.png" },
   { role: "Team Lead",                    org: "New York Fries", period: "Jul 2022 — Aug 2025", location: "Surrey, BC", logo: "/logos/nyf.png" },

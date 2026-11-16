@@ -47,7 +47,7 @@ function TiltPhoto() {
       initial={{ opacity: 0, scale: 0.94, y: 24, filter: "blur(10px)" }}
       animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
       transition={{ duration: 1, ease: EASE, delay: 0.2 }}
-      style={{ perspective: 900 }}
+      style={{ perspective: 900, position: "relative" }}
     >
       <motion.div
         ref={ref}
@@ -73,7 +73,27 @@ function TiltPhoto() {
         />
         <motion.div aria-hidden style={{ position: "absolute", inset: 0, background: glare, mixBlendMode: "soft-light", pointerEvents: "none" }} />
       </motion.div>
+      <SantaHat />
     </motion.div>
+  );
+}
+
+// Hung on the portrait's top-left corner, outside the photo's overflow clip.
+function SantaHat() {
+  return (
+    <motion.svg
+      aria-hidden
+      className="santa-hat"
+      viewBox="0 0 120 100"
+      initial={{ rotate: -40, y: -30, opacity: 0 }}
+      animate={{ rotate: -22, y: 0, opacity: 1 }}
+      transition={{ type: "spring", stiffness: 160, damping: 11, delay: 1.1 }}
+    >
+      <path d="M14 78 C 30 30, 70 8, 104 30 C 92 34, 84 44, 80 58 L 96 78 Z" fill="#C8202F" />
+      <path d="M14 78 C 30 30, 70 8, 104 30 C 96 32, 90 36, 86 42 C 70 26, 40 40, 24 78 Z" fill="#E23B4A" />
+      <rect x="4" y="70" width="98" height="20" rx="10" fill="#FBF8F2" />
+      <circle cx="104" cy="32" r="11" fill="#FBF8F2" />
+    </motion.svg>
   );
 }
 
@@ -136,7 +156,7 @@ export default function Hero() {
           <RevealLines text="David (Hanmin) Chang" delay={0.25} />
 
           <motion.p {...fade(0.8)} className="hero-blurb">
-            Hi, this is <span className="serif" style={{ fontSize: "1.25em", color: "var(--fg)" }}>David</span>, and welcome to my portfolio! Enjoy your stay.
+            Hi, this is <span className="serif" style={{ fontSize: "1.25em", color: "var(--fg)" }}>David</span>, and welcome to my portfolio! Enjoy your stay, and happy holidays.
           </motion.p>
 
           <motion.div {...fade(0.9)} className="hero-actions">
@@ -205,7 +225,7 @@ export default function Hero() {
           grid-template-columns: minmax(0, 1fr) auto;
           align-items: center;
           gap: 56px;
-          padding-top: 96px;
+          padding-top: 124px;
           padding-bottom: 24px;
         }
         .hero-copy { min-width: 0; }
@@ -259,17 +279,24 @@ export default function Hero() {
         .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
         .hero-photo { width: clamp(240px, 26vw, 360px); aspect-ratio: 4 / 5; }
+        .santa-hat {
+          position: absolute; z-index: 2; pointer-events: none;
+          width: 42%; left: -14%; top: -15%;
+          transform-origin: 70% 80%;
+          filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));
+        }
 
         @media (max-width: 860px) {
           .hero-grid {
             grid-template-columns: 1fr;
             gap: 34px;
             align-items: start;
-            padding-top: 88px;
+            padding-top: 112px;
             text-align: left;
           }
           .hero-portrait { order: -1; }
           .hero-photo { width: clamp(170px, 42vw, 230px); }
+          .santa-hat { left: -6%; top: -14%; width: 38%; }
           .hero-blurb { margin: 22px 0 24px; }
           .hero-rail-k { display: none !important; }
         }

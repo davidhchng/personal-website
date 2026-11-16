@@ -77,7 +77,7 @@ export default function Interlude({ items }: { items: string[] }) {
           --fg: #FFFFFF;
           --faint: rgba(255, 255, 255, 0.72);
           --line: rgba(255, 255, 255, 0.16);
-          --accent: #8FD8E4;
+          --accent: #FF9AA2;
           text-shadow: 0 1px 14px rgba(0, 0, 0, 0.45);
         }
         @media (max-width: 640px) {

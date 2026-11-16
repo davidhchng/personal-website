@@ -19,7 +19,7 @@ export default function ProjectMedia({ p, featured = false }: { p: Project; feat
   return (
     <div style={{
       position: "absolute", inset: 0, overflow: "hidden",
-      background: "linear-gradient(135deg, #3A5A66 0%, #16222B 100%)",
+      background: "linear-gradient(135deg, #2A6A47 0%, #12261B 100%)",
       display: "flex", alignItems: "flex-end", padding: 22,
     }}>
       <svg aria-hidden viewBox="0 0 200 120" preserveAspectRatio="none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.35 }}>

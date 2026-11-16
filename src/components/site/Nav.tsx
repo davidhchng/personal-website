@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValueEvent, useScroll, useSpring } from "framer-motion";
 import { SECTIONS } from "@/lib/content";
 import { actions } from "@/lib/store";
+import StringLights from "./StringLights";
 
 export default function Nav() {
   const [active, setActive] = useState<string | null>(null);
@@ -40,8 +41,8 @@ export default function Nav() {
 
   return (
     <motion.nav
-      initial={{ y: -70 }}
-      animate={{ y: hidden ? -70 : 0 }}
+      initial={{ y: -90 }}
+      animate={{ y: hidden ? -90 : 0 }}
       transition={{ type: "spring", stiffness: 380, damping: 36 }}
       style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
@@ -52,6 +53,7 @@ export default function Nav() {
         transition: "background-color .3s ease, border-color .3s ease",
       }}
     >
+      <StringLights />
       <div className="wrap" style={{ height: 56, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
         <button
           onClick={() => actions.scrollTo("top")}

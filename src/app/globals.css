@@ -2,62 +2,68 @@
 
 /* ── Tokens ───────────────────────────────────────────────────────────────── */
 
-/* Palette sampled directly from the Wedgemount Lake photo in public/v —
-   hazy sky, slate rock, glacial lake, scree. Daylight on the ridge. */
+/* Christmas palette — fresh snow, pine, cranberry, a little candle-gold.
+   Same token names as the old Wedgemount set, so every component follows. */
 :root {
-  --bg: #F3F6F8;              /* sky haze */
+  --bg: #F8F5EF;              /* snow under warm window light */
   --bg-elev: #FFFFFF;
-  --bg-sunk: #E7EEF2;         /* pale glacier */
-  --fg: #18222C;              /* wet slate */
-  --muted: #556673;
-  --subtle: #6B7D8B;
-  --faint: #9FAFBC;
-  --line: rgba(24, 34, 44, 0.10);
-  --line-strong: rgba(24, 34, 44, 0.20);
-  --accent: #1C5F6E;          /* glacial lake, darkened to hold contrast */
-  --accent-soft: rgba(28, 95, 110, 0.09);
+  --bg-sunk: #EFE9DF;
+  --fg: #16261D;              /* pine needle black */
+  --muted: #4A5C51;
+  --subtle: #5F7065;
+  --faint: #9DAAA1;
+  --line: rgba(22, 38, 29, 0.10);
+  --line-strong: rgba(22, 38, 29, 0.20);
+  --accent: #A3162E;          /* cranberry, ~7:1 on --bg */
+  --accent-soft: rgba(163, 22, 46, 0.08);
+  --pine: #1F5B3A;
+  --gold: #B8862B;
   --bucks: #00471B;           /* Bucks green, kept for the basketball bits */
   --cream: #EEE1C6;
   --blue: #4E7FA8;
-  --dot: 24, 34, 44;
-  --shadow: 0 1px 2px rgba(24,34,44,0.05), 0 8px 24px -12px rgba(24,34,44,0.16);
-  --shadow-lg: 0 30px 80px -30px rgba(24,34,44,0.40);
-  --nav-bg: rgba(243, 246, 248, 0.78);
-  /* Drawn horizon. Solid tones — RidgeHorizon applies its own alpha ramp so the
-     crests stay transparent. Distance reads lighter and bluer. */
-  --ridge-far: #9DB4D2;
-  --ridge-mid: #5A7A96;
-  --ridge-near: #2A3B4A;
-  --ridge-line: rgba(24, 34, 44, 0.48);
-  --ridge-line-soft: rgba(24, 34, 44, 0.22);
+  --dot: 22, 38, 29;
+  --shadow: 0 1px 2px rgba(22,38,29,0.05), 0 8px 24px -12px rgba(22,38,29,0.16);
+  --shadow-lg: 0 30px 80px -30px rgba(22,38,29,0.40);
+  --nav-bg: rgba(248, 245, 239, 0.80);
+  --snow: 150, 178, 198;      /* icy blue — white flakes vanish on snow */
+  /* Drawn horizon: snowy far peaks, pine-dark foothills. RidgeHorizon applies
+     its own alpha ramp so the crests stay transparent. */
+  --ridge-far: #B9CAD6;
+  --ridge-mid: #5E8572;
+  --ridge-near: #1D3A2B;
+  --ridge-line: rgba(22, 38, 29, 0.45);
+  --ridge-line-soft: rgba(22, 38, 29, 0.20);
   color-scheme: light;
 }
 
-/* Same mountain after dusk */
+/* Silent night */
 :root[data-theme="dark"] {
-  --bg: #0D141A;
-  --bg-elev: #151E25;
-  --bg-sunk: #111920;
-  --fg: #E9F0F4;              /* glacier white */
-  --muted: #A2B3C0;
-  --subtle: #8698A6;
-  --faint: #5A6A78;
-  --line: rgba(233, 240, 244, 0.09);
-  --line-strong: rgba(233, 240, 244, 0.20);
-  --accent: #6CC2D1;          /* lake lit from below */
-  --accent-soft: rgba(108, 194, 209, 0.14);
+  --bg: #0C1511;
+  --bg-elev: #13201A;
+  --bg-sunk: #101B16;
+  --fg: #F4EFE6;              /* candlelit snow */
+  --muted: #B6C2B9;
+  --subtle: #95A59A;
+  --faint: #5D6E63;
+  --line: rgba(244, 239, 230, 0.09);
+  --line-strong: rgba(244, 239, 230, 0.20);
+  --accent: #F2626B;          /* holly berry, lit */
+  --accent-soft: rgba(242, 98, 107, 0.14);
+  --pine: #5CB487;
+  --gold: #E9C46A;
   --bucks: #5CC27E;
   --cream: #EEE1C6;
   --blue: #76A9D6;
-  --dot: 233, 240, 244;
+  --dot: 244, 239, 230;
   --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.6);
   --shadow-lg: 0 30px 80px -30px rgba(0,0,0,0.8);
-  --nav-bg: rgba(13, 20, 26, 0.72);
-  --ridge-far: #3E5A78;
-  --ridge-mid: #2E4A5C;
-  --ridge-near: #16222B;
-  --ridge-line: rgba(233, 240, 244, 0.38);
-  --ridge-line-soft: rgba(233, 240, 244, 0.17);
+  --nav-bg: rgba(12, 21, 17, 0.74);
+  --snow: 255, 255, 255;
+  --ridge-far: #33495A;
+  --ridge-mid: #1F3D2D;
+  --ridge-near: #0E1D15;
+  --ridge-line: rgba(244, 239, 230, 0.38);
+  --ridge-line-soft: rgba(244, 239, 230, 0.17);
   color-scheme: dark;
 }
 
